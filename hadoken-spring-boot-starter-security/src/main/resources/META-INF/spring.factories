@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.hadoken.framework.security.config.HadokenSecurityAutoConfiguration,\
+  com.hadoken.framework.security.config.HadokenWebSecurityConfig

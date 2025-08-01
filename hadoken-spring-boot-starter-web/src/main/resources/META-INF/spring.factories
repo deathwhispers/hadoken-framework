@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.hadoken.framework.apilog.config.HadokenApiLogAutoConfiguration,\
+com.hadoken.framework.swagger.config.SwaggerUiWebMvcConfiguration,\
+com.hadoken.framework.jackson.config.HadokenJacksonAutoConfiguration,\
+com.hadoken.framework.web.config.HadokenWebAutoConfiguration

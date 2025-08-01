@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.hadoken.framework.mybatis.config.MybatisAutoConfiguration,\
+  com.hadoken.framework.datasource.config.DataSourceAutoConfiguration

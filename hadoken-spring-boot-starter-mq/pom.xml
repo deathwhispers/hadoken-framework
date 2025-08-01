@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.hadoken</groupId>
+        <artifactId>hadoken-framework</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>hadoken-spring-boot-starter-mq</artifactId>
+    <name>${project.artifactId}</name>
+    <description>消息队列，基于 Redis Pub/Sub 实现广播消费，基于 Stream 实现集群消费</description>
+
+    <dependencies>
+        <!-- 内部依赖 -->
+        <dependency>
+            <groupId>com.hadoken</groupId>
+            <artifactId>hadoken-spring-boot-starter-redis</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+</project>
