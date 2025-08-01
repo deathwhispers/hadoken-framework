@@ -2,11 +2,11 @@ package com.hadoken.framework.security.core;
 
 import cn.hutool.core.map.MapUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hadoken.common.enums.CommonStatusEnum;
+import com.hadoken.common.enums.UserTypeEnum;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import com.hadoken.common.enums.CommonStatusEnum;
-import com.hadoken.common.enums.UserTypeEnum;
 
 import java.util.*;
 

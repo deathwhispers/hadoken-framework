@@ -1,12 +1,11 @@
 package com.hadoken.framework.security.config;
 
+import com.hadoken.framework.web.config.WebProperties;
+import jakarta.annotation.Resource;
 import org.springframework.core.Ordered;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-import com.hadoken.framework.web.config.WebProperties;
-
-import jakarta.annotation.Resource;
 
 /**
  * <p>

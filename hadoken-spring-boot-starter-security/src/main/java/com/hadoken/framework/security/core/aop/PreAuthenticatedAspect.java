@@ -1,11 +1,11 @@
 package com.hadoken.framework.security.core.aop;
 
+import com.hadoken.framework.security.core.annotations.PreAuthenticated;
+import com.hadoken.framework.security.core.util.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import com.hadoken.framework.security.core.annotations.PreAuthenticated;
-import com.hadoken.framework.security.core.util.SecurityUtils;
 
 import static com.hadoken.common.exception.enums.GlobalErrorCodeConstants.UNAUTHORIZED;
 import static com.hadoken.common.exception.util.HadokenServiceExceptionUtil.exception;

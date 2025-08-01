@@ -1,11 +1,11 @@
 package com.hadoken.common.result;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import org.springframework.util.Assert;
 import com.hadoken.common.exception.ErrorCode;
 import com.hadoken.common.exception.HadokenServiceException;
 import com.hadoken.common.exception.enums.GlobalErrorCodeConstants;
+import lombok.Data;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
 import java.util.Objects;

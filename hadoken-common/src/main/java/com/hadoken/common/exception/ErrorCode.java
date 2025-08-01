@@ -1,8 +1,8 @@
 package com.hadoken.common.exception;
 
-import lombok.Data;
 import com.hadoken.common.exception.enums.GlobalErrorCodeConstants;
 import com.hadoken.common.exception.enums.ServiceErrorCodeRange;
+import lombok.Data;
 
 /**
  * 错误码对象

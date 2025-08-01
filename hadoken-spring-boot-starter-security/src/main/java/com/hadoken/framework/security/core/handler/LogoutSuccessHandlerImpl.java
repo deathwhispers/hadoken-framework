@@ -1,17 +1,16 @@
 package com.hadoken.framework.security.core.handler;
 
-import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import com.hadoken.common.result.CommonResult;
 import com.hadoken.common.util.string.StringUtils;
 import com.hadoken.framework.security.config.SecurityProperties;
 import com.hadoken.framework.security.core.authentication.MultiUserDetailsAuthenticationProvider;
 import com.hadoken.framework.security.core.util.SecurityUtils;
 import com.hadoken.framework.web.core.util.ServletUtils;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
 /**

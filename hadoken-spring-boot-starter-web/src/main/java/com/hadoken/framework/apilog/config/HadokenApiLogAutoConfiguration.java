@@ -1,17 +1,16 @@
 package com.hadoken.framework.apilog.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import com.hadoken.common.enums.WebFilterOrderEnum;
 import com.hadoken.framework.apilog.core.filter.ApiAccessLogFilter;
 import com.hadoken.framework.apilog.core.service.ApiAccessLogFrameworkService;
 import com.hadoken.framework.web.config.HadokenWebAutoConfiguration;
 import com.hadoken.framework.web.config.WebProperties;
-
 import jakarta.servlet.Filter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Api 日志自动配置类

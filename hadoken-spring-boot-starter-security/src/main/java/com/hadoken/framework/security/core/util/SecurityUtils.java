@@ -3,6 +3,11 @@ package com.hadoken.framework.security.core.util;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.hadoken.common.exception.BadRequestException;
+import com.hadoken.framework.security.core.LoginUser;
+import com.hadoken.framework.security.core.enums.DataScopeEnum;
+import com.hadoken.framework.web.core.util.WebUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,12 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
-import com.hadoken.common.exception.BadRequestException;
-import com.hadoken.framework.security.core.LoginUser;
-import com.hadoken.framework.security.core.enums.DataScopeEnum;
-import com.hadoken.framework.web.core.util.WebUtils;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Set;
 

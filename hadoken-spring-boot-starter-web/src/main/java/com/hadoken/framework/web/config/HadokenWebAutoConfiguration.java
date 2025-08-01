@@ -1,10 +1,7 @@
 package com.hadoken.framework.web.config;
 
 import com.hadoken.common.enums.WebFilterOrderEnum;
-import com.hadoken.framework.apilog.core.service.ApiErrorLogFrameworkService;
 import com.hadoken.framework.web.core.filter.CacheRequestBodyFilter;
-import com.hadoken.framework.web.core.filter.XssFilter;
-import com.hadoken.framework.web.core.handler.GlobalExceptionHandler;
 import jakarta.annotation.Resource;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +10,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.util.PathMatcher;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;

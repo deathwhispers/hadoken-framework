@@ -2,7 +2,6 @@ package com.hadoken.framework.apilog.core.filter;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.json.JSONUtil;
 import com.hadoken.common.exception.enums.GlobalErrorCodeConstants;
 import com.hadoken.common.result.CommonResult;

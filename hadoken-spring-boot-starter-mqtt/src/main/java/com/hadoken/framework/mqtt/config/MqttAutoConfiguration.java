@@ -1,6 +1,7 @@
 package com.hadoken.framework.mqtt.config;
 
 import com.hadoken.common.exception.BadRequestException;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -18,7 +19,6 @@ import org.springframework.integration.mqtt.support.MqttMessageConverter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
-import jakarta.annotation.Resource;
 import java.time.Instant;
 import java.util.Collection;
 

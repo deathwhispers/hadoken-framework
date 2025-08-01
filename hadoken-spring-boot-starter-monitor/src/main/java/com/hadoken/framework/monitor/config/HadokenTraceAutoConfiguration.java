@@ -1,14 +1,14 @@
 package com.hadoken.framework.monitor.config;
 
+import com.hadoken.common.enums.WebFilterOrderEnum;
+import com.hadoken.framework.monitor.core.aop.BizTracerAspect;
+import com.hadoken.framework.monitor.core.filter.TracerFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.hadoken.common.enums.WebFilterOrderEnum;
-import com.hadoken.framework.monitor.core.aop.BizTracerAspect;
-import com.hadoken.framework.monitor.core.filter.TracerFilter;
 
 /**
  * Tracer 配置类

@@ -1,8 +1,8 @@
 package com.hadoken.framework.mybatis.core.codec;
 
-import org.springframework.stereotype.Component;
 import com.hadoken.framework.mybatis.core.annotation.EncryptTransaction;
 import com.hadoken.framework.mybatis.core.util.DBAESUtil;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.util.Objects;

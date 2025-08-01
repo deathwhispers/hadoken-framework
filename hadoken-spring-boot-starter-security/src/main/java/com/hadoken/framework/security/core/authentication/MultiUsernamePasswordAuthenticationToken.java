@@ -1,9 +1,9 @@
 package com.hadoken.framework.security.core.authentication;
 
+import com.hadoken.common.enums.UserTypeEnum;
 import lombok.Getter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-import com.hadoken.common.enums.UserTypeEnum;
 
 import java.util.Collection;
 

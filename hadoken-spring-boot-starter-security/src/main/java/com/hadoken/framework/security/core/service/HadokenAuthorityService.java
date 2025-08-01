@@ -1,6 +1,5 @@
 package com.hadoken.framework.security.core.service;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 /**

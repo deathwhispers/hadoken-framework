@@ -1,5 +1,15 @@
 package com.hadoken.framework.security.config;
 
+import com.hadoken.framework.security.core.aop.PreAuthenticatedAspect;
+import com.hadoken.framework.security.core.authentication.MultiUserDetailsAuthenticationProvider;
+import com.hadoken.framework.security.core.context.TransmittableThreadLocalSecurityContextHolderStrategy;
+import com.hadoken.framework.security.core.filter.JWTAuthenticationTokenFilter;
+import com.hadoken.framework.security.core.handler.AuthenticationEntryPointImpl;
+import com.hadoken.framework.security.core.handler.LogoutSuccessHandlerImpl;
+import com.hadoken.framework.security.core.service.SecurityAuthFrameworkService;
+import com.hadoken.framework.web.config.WebProperties;
+import com.hadoken.framework.web.core.handler.GlobalExceptionHandler;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -11,17 +21,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import com.hadoken.framework.security.core.aop.PreAuthenticatedAspect;
-import com.hadoken.framework.security.core.authentication.MultiUserDetailsAuthenticationProvider;
-import com.hadoken.framework.security.core.context.TransmittableThreadLocalSecurityContextHolderStrategy;
-import com.hadoken.framework.security.core.filter.JWTAuthenticationTokenFilter;
-import com.hadoken.framework.security.core.handler.AuthenticationEntryPointImpl;
-import com.hadoken.framework.security.core.handler.LogoutSuccessHandlerImpl;
-import com.hadoken.framework.security.core.service.SecurityAuthFrameworkService;
-import com.hadoken.framework.web.config.WebProperties;
-import com.hadoken.framework.web.core.handler.GlobalExceptionHandler;
 
-import jakarta.annotation.Resource;
 import java.util.List;
 
 /**

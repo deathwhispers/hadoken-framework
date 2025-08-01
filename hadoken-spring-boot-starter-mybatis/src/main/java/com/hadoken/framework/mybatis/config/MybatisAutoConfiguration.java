@@ -2,11 +2,11 @@ package com.hadoken.framework.mybatis.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.hadoken.framework.mybatis.core.handler.DefaultDBFieldHandler;
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.hadoken.framework.mybatis.core.handler.DefaultDBFieldHandler;
 
 /**
  * Mybatis 配置类

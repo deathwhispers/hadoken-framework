@@ -2,7 +2,10 @@ package com.hadoken.common.util.page;
 
 import org.springframework.data.domain.Page;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 分页工具

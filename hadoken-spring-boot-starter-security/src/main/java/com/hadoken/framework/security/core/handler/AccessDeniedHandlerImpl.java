@@ -1,17 +1,16 @@
 package com.hadoken.framework.security.core.handler;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.access.ExceptionTranslationFilter;
 import com.hadoken.common.exception.enums.GlobalErrorCodeConstants;
 import com.hadoken.common.result.CommonResult;
 import com.hadoken.framework.security.core.util.SecurityUtils;
 import com.hadoken.framework.web.core.util.ServletUtils;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.ExceptionTranslationFilter;
 
 
 /**

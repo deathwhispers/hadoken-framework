@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author yanggj
- *  {@link HadokenServiceException} 工具类
+ * {@link HadokenServiceException} 工具类
  * <p>
  * 目的在于，格式化异常信息提示。
  * 考虑到 String.format 在参数不正确时会报错，因此使用 {} 作为占位符，并使用 {@link #doFormat(int, String, Object...)} 方法来格式化
@@ -22,8 +22,8 @@ import java.util.concurrent.ConcurrentMap;
  * 2. 异常提示信息，写在 .properties 等等配置文件
  * 3. 异常提示信息，写在 Apollo 等等配置中心中，从而实现可动态刷新
  * 4. 异常提示信息，存储在 db 等等数据库中，从而实现可动态刷新
- * @date 2022/02/28 16:00
  * @version 1.0.0
+ * @date 2022/02/28 16:00
  */
 @Slf4j
 public class HadokenServiceExceptionUtil {

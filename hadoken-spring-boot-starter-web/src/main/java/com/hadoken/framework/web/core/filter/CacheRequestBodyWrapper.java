@@ -1,11 +1,10 @@
 package com.hadoken.framework.web.core.filter;
 
-import cn.hutool.extra.servlet.ServletUtil;
-
 import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -2,6 +2,7 @@ package com.hadoken.framework.websocket.config;
 
 import com.hadoken.framework.websocket.core.interceptor.HadokenWebSocketHandleInterceptor;
 import com.hadoken.framework.websocket.core.message.DefaultWebSocketSender;
+import jakarta.annotation.Resource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-
-import jakarta.annotation.Resource;
 
 /**
  * @author yanggj

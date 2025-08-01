@@ -1,6 +1,12 @@
 package com.hadoken.framework.security.core.authentication;
 
 import cn.hutool.core.lang.Assert;
+import com.hadoken.common.enums.UserTypeEnum;
+import com.hadoken.common.util.string.StringUtils;
+import com.hadoken.framework.security.core.LoginUser;
+import com.hadoken.framework.security.core.service.SecurityAuthFrameworkService;
+import com.hadoken.framework.web.config.WebProperties;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,13 +14,7 @@ import org.springframework.security.authentication.dao.AbstractUserDetailsAuthen
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.hadoken.common.enums.UserTypeEnum;
-import com.hadoken.common.util.string.StringUtils;
-import com.hadoken.framework.security.core.LoginUser;
-import com.hadoken.framework.security.core.service.SecurityAuthFrameworkService;
-import com.hadoken.framework.web.config.WebProperties;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
