@@ -1,6 +1,7 @@
 package com.hadoken.framework.websocket.core.interceptor;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.Message;
@@ -17,9 +18,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0.0
  * @date 2022/6/6 9:54
  */
+@Slf4j
 @SuppressWarnings("all")
 public class HadokenWebSocketHandleInterceptor implements ChannelInterceptor {
-    private static final Logger logger = LoggerFactory.getLogger(HadokenWebSocketHandleInterceptor.class);
 
     public static final ConcurrentHashMap<String, Integer> SUBSCRIBE_COUNT = new ConcurrentHashMap<>();
 
@@ -33,7 +34,7 @@ public class HadokenWebSocketHandleInterceptor implements ChannelInterceptor {
             //2、判断token
             String token = accessor.getFirstNativeHeader("Authorization");
             if (StrUtil.isNotBlank(token)) {
-                logger.info("stompClient-token:{}", token);
+                log.info("stompClient-token:{}", token);
 /*                if (loginUser != null) {
                     //如果存在用户信息，将用户名赋值，后期发送时，可以指定用户名即可发送到对应用户
                     Principal principal = () -> loginUser.getUsername();
@@ -73,18 +74,18 @@ public class HadokenWebSocketHandleInterceptor implements ChannelInterceptor {
             return;
         }
         // 根据连接状态做处理，这里也只是打印了下，可以根据实际场景，对上线，下线，首次成功连接做处理
-        logger.debug("command: {}", accessor.getCommand());
+        log.debug("command: {}", accessor.getCommand());
         switch (accessor.getCommand()) {
             case CONNECT:
                 // 首次连接
-                logger.info(" 首次连接");
+                log.info(" 首次连接");
                 break;
             case CONNECTED:
                 // 连接中
                 break;
             case DISCONNECT:
                 // 下线
-                logger.info(" 下线");
+                log.info(" 下线");
                 break;
             case SUBSCRIBE:
                 String subscribeTopic = accessor.getDestination();

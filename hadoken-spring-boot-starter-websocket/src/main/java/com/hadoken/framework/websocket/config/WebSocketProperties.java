@@ -1,5 +1,8 @@
 package com.hadoken.framework.websocket.config;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -11,6 +14,8 @@ import java.util.Map;
  * @version 1.0.0
  * @date 2022/4/25 15:19
  */
+@Getter
+@Setter
 @ToString
 @ConfigurationProperties(prefix = "hadoken.websocket")
 public class WebSocketProperties implements Serializable {
@@ -49,63 +54,11 @@ public class WebSocketProperties implements Serializable {
     protected HeartBeatConfig heartBeat = new HeartBeatConfig();
     protected TaskSchedulerConfig wsTaskScheduler = new TaskSchedulerConfig();
 
-    public String getEndpoint() {
-        return endpoint;
+    public String getTopicByKey(String key) {
+        return topics.getOrDefault(key, "");
     }
 
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
-
-    public String[] getApplicationDestinationPrefixes() {
-        return applicationDestinationPrefixes;
-    }
-
-    public void setApplicationDestinationPrefixes(String... applicationDestinationPrefixes) {
-        this.applicationDestinationPrefixes = applicationDestinationPrefixes;
-    }
-
-    public String getUserDestinationPrefix() {
-        return userDestinationPrefix;
-    }
-
-    public void setUserDestinationPrefix(String userDestinationPrefix) {
-        this.userDestinationPrefix = userDestinationPrefix;
-    }
-
-    public String[] getTopicDestinationPrefix() {
-        return topicDestinationPrefix;
-    }
-
-    public void setTopicDestinationPrefix(String[] topicDestinationPrefix) {
-        this.topicDestinationPrefix = topicDestinationPrefix;
-    }
-
-    public Map<String, String> getTopics() {
-        return topics;
-    }
-
-    public void setTopics(Map<String, String> topics) {
-        this.topics = topics;
-    }
-
-    public HeartBeatConfig getHeartBeat() {
-        return heartBeat;
-    }
-
-    public void setHeartBeat(HeartBeatConfig heartBeat) {
-        this.heartBeat = heartBeat;
-    }
-
-    public TaskSchedulerConfig getWsTaskScheduler() {
-        return wsTaskScheduler;
-    }
-
-    public void setWsTaskScheduler(TaskSchedulerConfig wsTaskScheduler) {
-        this.wsTaskScheduler = wsTaskScheduler;
-    }
-
-    @ToString
+    @Data
     public static class HeartBeatConfig {
         /**
          * 服务端心跳时间，默认 10s
@@ -116,24 +69,9 @@ public class WebSocketProperties implements Serializable {
          */
         private Long client = DEFAULT_CLIENT_HEART_BEAT;
 
-        public Long getServer() {
-            return server;
-        }
-
-        public void setServer(Long server) {
-            this.server = server;
-        }
-
-        public Long getClient() {
-            return client;
-        }
-
-        public void setClient(Long client) {
-            this.client = client;
-        }
     }
 
-    @ToString
+    @Data
     public static class TaskSchedulerConfig {
         /**
          * 线程名称前缀，默认为 hadoken-websocket-
@@ -144,21 +82,6 @@ public class WebSocketProperties implements Serializable {
          */
         private Integer poolSize = DEFAULT_POOL_SIZE;
 
-        public String getThreadNamePrefix() {
-            return threadNamePrefix;
-        }
-
-        public void setThreadNamePrefix(String threadNamePrefix) {
-            this.threadNamePrefix = threadNamePrefix;
-        }
-
-        public Integer getPoolSize() {
-            return poolSize;
-        }
-
-        public void setPoolSize(Integer poolSize) {
-            this.poolSize = poolSize;
-        }
     }
 
 }

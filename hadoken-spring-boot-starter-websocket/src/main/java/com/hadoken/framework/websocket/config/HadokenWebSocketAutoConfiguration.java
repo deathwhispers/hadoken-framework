@@ -29,8 +29,8 @@ public class HadokenWebSocketAutoConfiguration implements WebSocketMessageBroker
     private WebSocketProperties webSocketProperties;
 
     @Bean
-    public DefaultWebSocketSender defaultWebSocketSender(SimpMessagingTemplate simpMessagingTemplate) {
-        return new DefaultWebSocketSender(simpMessagingTemplate);
+    public DefaultWebSocketSender defaultWebSocketSender() {
+        return new DefaultWebSocketSender();
     }
 
     // 添加这个Endpoint，这样在网页中就可以通过websocket连接上服务,也就是我们配置websocket的服务地址,并且可以指定是否使用socketjs
@@ -92,6 +92,11 @@ public class HadokenWebSocketAutoConfiguration implements WebSocketMessageBroker
                 .setTaskScheduler(wsTaskScheduler());
     }
 
+    /**
+     * ⚠️注意：此处不能定义为 taskScheduler，会和 Spring task 定时任务中的线程池冲突
+     *
+     * @return {@link TaskScheduler}
+     */
     @Bean
     public TaskScheduler wsTaskScheduler() {
         ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
