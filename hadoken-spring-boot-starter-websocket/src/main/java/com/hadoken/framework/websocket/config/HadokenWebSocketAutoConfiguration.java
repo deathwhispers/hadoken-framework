@@ -3,6 +3,7 @@ package com.hadoken.framework.websocket.config;
 import com.hadoken.framework.websocket.core.interceptor.HadokenWebSocketHandleInterceptor;
 import com.hadoken.framework.websocket.core.message.DefaultWebSocketSender;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
  * @version 1.0.0
  * @date 2022/4/25 15:15
  */
+@Slf4j
 @Configuration
 @EnableConfigurationProperties(WebSocketProperties.class)
 @EnableWebSocketMessageBroker
@@ -27,11 +29,6 @@ public class HadokenWebSocketAutoConfiguration implements WebSocketMessageBroker
 
     @Resource
     private WebSocketProperties webSocketProperties;
-
-    @Bean
-    public DefaultWebSocketSender defaultWebSocketSender() {
-        return new DefaultWebSocketSender();
-    }
 
     // 添加这个Endpoint，这样在网页中就可以通过websocket连接上服务,也就是我们配置websocket的服务地址,并且可以指定是否使用socketjs
     @Override
@@ -104,5 +101,11 @@ public class HadokenWebSocketAutoConfiguration implements WebSocketMessageBroker
         threadPoolTaskScheduler.setThreadNamePrefix(webSocketProperties.getWsTaskScheduler().getThreadNamePrefix());
         threadPoolTaskScheduler.initialize();
         return threadPoolTaskScheduler;
+    }
+
+    @Bean
+    public DefaultWebSocketSender defaultWebSocketSender(SimpMessagingTemplate simpMessagingTemplate,
+                                                         WebSocketProperties webSocketProperties) {
+        return new DefaultWebSocketSender(simpMessagingTemplate, webSocketProperties);
     }
 }
