@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.hadoken</groupId>
+        <groupId>com.hadoken.framework</groupId>
         <artifactId>hadoken-framework</artifactId>
-        <version>${revision}</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>hadoken-spring-boot-starter-websocket</artifactId>
@@ -14,7 +14,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hadoken</groupId>
+            <groupId>com.hadoken.framework</groupId>
             <artifactId>hadoken-common</artifactId>
         </dependency>
 

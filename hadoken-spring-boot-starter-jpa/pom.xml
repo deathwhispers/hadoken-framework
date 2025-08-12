@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>hadoken-framework</artifactId>
-        <groupId>com.hadoken</groupId>
-        <version>${revision}</version>
+        <groupId>com.hadoken.framework</groupId>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>hadoken-spring-boot-starter-jpa</artifactId>
@@ -16,12 +16,12 @@
     <dependencies>
         <!-- 内部依赖 -->
         <dependency>
-            <groupId>com.hadoken</groupId>
+            <groupId>com.hadoken.framework</groupId>
             <artifactId>hadoken-spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.hadoken</groupId>
+            <groupId>com.hadoken.framework</groupId>
             <artifactId>hadoken-spring-boot-starter-security</artifactId>
         </dependency>
 

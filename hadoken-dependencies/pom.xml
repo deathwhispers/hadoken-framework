@@ -3,28 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hadoken</groupId>
+    <groupId>com.hadoken.framework</groupId>
     <artifactId>hadoken-dependencies</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0</version>
 
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
     <description>基础 bom 文件，管理整个项目的依赖版本</description>
-
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
 
     <properties>
         <!-- 项目统一版本 -->
@@ -584,59 +570,59 @@
 
             <!-- 内部依赖 -->
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-jpa</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-common</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-monitor</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-mq</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-mqtt</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-mybatis</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-redis</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-security</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-timer</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-web</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>com.hadoken</groupId>
+                <groupId>com.hadoken.framework</groupId>
                 <artifactId>hadoken-spring-boot-starter-websocket</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
