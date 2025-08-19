@@ -8,16 +8,16 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>hadoken-spring-boot-starter-mybatis</artifactId>
+    <artifactId>hadoken-mybatis-spring-boot-starter</artifactId>
     <name>${project.artifactId}</name>
 
-    <description>hadoken-springboot-starter-mybatis</description>
+    <description>hadoken-mybatis-spring-boot-starter</description>
 
     <dependencies>
         <!-- 内部依赖 -->
         <dependency>
             <groupId>com.hadoken.framework</groupId>
-            <artifactId>hadoken-spring-boot-starter-web</artifactId>
+            <artifactId>hadoken-web-spring-boot-starter</artifactId>
             <version>1.0.0</version>
         </dependency>
 

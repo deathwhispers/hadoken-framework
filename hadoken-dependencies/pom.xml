@@ -571,7 +571,7 @@
             <!-- 内部依赖 -->
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-jpa</artifactId>
+                <artifactId>hadoken-jpa-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
@@ -581,47 +581,47 @@
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-monitor</artifactId>
+                <artifactId>hadoken-monitor-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-mq</artifactId>
+                <artifactId>hadoken-mq-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-mqtt</artifactId>
+                <artifactId>hadoken-mqtt-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-mybatis</artifactId>
+                <artifactId>hadoken-mybatis-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-redis</artifactId>
+                <artifactId>hadoken-redis-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-security</artifactId>
+                <artifactId>hadoken-security-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-timer</artifactId>
+                <artifactId>hadoken-scheduling-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-web</artifactId>
+                <artifactId>hadoken-web-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-spring-boot-starter-websocket</artifactId>
+                <artifactId>hadoken-websocket-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
         </dependencies>

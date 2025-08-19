@@ -8,9 +8,9 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>hadoken-spring-boot-starter-mqtt</artifactId>
-    <name>hadoken-springboot-starter-mqtt</name>
-    <description>hadoken-springboot-starter-mqtt</description>
+    <artifactId>hadoken-mqtt-spring-boot-starter</artifactId>
+    <name>${project.artifactId}</name>
+    <description>hadoken-mqtt-spring-boot-starter</description>
 
     <dependencies>
         <!-- 内部依赖 start -->

@@ -7,10 +7,11 @@
         <artifactId>hadoken-framework</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>hadoken-spring-boot-starter-timer</artifactId>
-    <name>${project.artifactId}</name>
 
-    <description>hadoken-springboot-starter-timer</description>
+    <artifactId>hadoken-redis-spring-boot-starter</artifactId>
+
+    <name>${project.artifactId}</name>
+    <description>hadoken-redis-spring-boot-starter</description>
 
     <dependencies>
         <dependency>
@@ -18,16 +19,20 @@
             <artifactId>hadoken-common</artifactId>
         </dependency>
 
-        <!-- Job 定时任务相关 -->
+        <!-- DB 相关 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-quartz</artifactId>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- 工具类相关 -->
+        <!-- spring boot 缓存 -->
         <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 </project>

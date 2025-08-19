@@ -8,10 +8,10 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>hadoken-spring-boot-starter-monitor</artifactId>
+    <artifactId>hadoken-monitor-spring-boot-starter</artifactId>
 
     <name>${project.artifactId}</name>
-    <description>hadoken-springboot-starter-monitor</description>
+    <description>hadoken-monitor-spring-boot-starter</description>
 
     <dependencies>
         <dependency>

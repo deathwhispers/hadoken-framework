@@ -8,7 +8,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>hadoken-spring-boot-starter-mq</artifactId>
+    <artifactId>hadoken-mq-spring-boot-starter</artifactId>
     <name>${project.artifactId}</name>
     <description>消息队列，基于 Redis Pub/Sub 实现广播消费，基于 Stream 实现集群消费</description>
 
@@ -16,7 +16,7 @@
         <!-- 内部依赖 -->
         <dependency>
             <groupId>com.hadoken.framework</groupId>
-            <artifactId>hadoken-spring-boot-starter-redis</artifactId>
+            <artifactId>hadoken-redis-spring-boot-starter</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

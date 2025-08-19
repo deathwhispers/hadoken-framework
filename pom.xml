@@ -28,16 +28,17 @@
     <modules>
         <module>hadoken-common</module>
         <module>hadoken-dependencies</module>
-        <module>hadoken-spring-boot-starter-jpa</module>
-        <module>hadoken-spring-boot-starter-monitor</module>
-        <module>hadoken-spring-boot-starter-mq</module>
-        <module>hadoken-spring-boot-starter-mqtt</module>
-        <module>hadoken-spring-boot-starter-mybatis</module>
-        <module>hadoken-spring-boot-starter-redis</module>
-        <module>hadoken-spring-boot-starter-security</module>
-        <module>hadoken-spring-boot-starter-timer</module>
-        <module>hadoken-spring-boot-starter-web</module>
-        <module>hadoken-spring-boot-starter-websocket</module>
+        <module>hadoken-jpa-spring-boot-starter</module>
+        <module>hadoken-monitor-spring-boot-starter</module>
+        <module>hadoken-mq-spring-boot-starter</module>
+        <module>hadoken-mqtt-spring-boot-starter</module>
+        <module>hadoken-mybatis-spring-boot-starter</module>
+        <module>hadoken-redis-spring-boot-starter</module>
+        <module>hadoken-security-spring-boot-starter</module>
+        <module>hadoken-scheduling-spring-boot-starter</module>
+        <module>hadoken-stats-spring-boot-starter</module>
+        <module>hadoken-web-spring-boot-starter</module>
+        <module>hadoken-websocket-spring-boot-starter</module>
     </modules>
 
     <dependencyManagement>
