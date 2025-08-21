@@ -8,9 +8,9 @@ import org.springframework.validation.annotation.Validated;
 
 import java.time.Duration;
 
-@ConfigurationProperties(prefix = "hadoken.security")
 @Validated
 @Data
+@ConfigurationProperties(prefix = "hadoken.security")
 public class SecurityProperties {
 
     /**

@@ -28,7 +28,7 @@ import java.util.List;
  * Spring Security 自动配置类，主要用于相关组件的配置
  * <p>
  * 注意，不能和 {@link HadokenWebSecurityConfig} 用一个，原因是会导致初始化报错。
- * 参见 https://stackoverflow.com/questions/53847050/spring-boot-delegatebuilder-cannot-be-null-on-autowiring-authenticationmanager 文档。
+ * 参见 <a href="https://stackoverflow.com/questions/53847050/spring-boot-delegatebuilder-cannot-be-null-on-autowiring-authenticationmanager">...</a> 文档。
  *
  * @author yanggj
  */

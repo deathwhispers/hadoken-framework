@@ -13,6 +13,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
@@ -83,7 +85,7 @@ public class HadokenWebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 // 禁用 CSRF
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
 
                 // 启用 CORS
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -99,8 +101,7 @@ public class HadokenWebSecurityConfig {
 
                 // 🔥 新方式：直接配置 headers，禁用 frameOptions
                 .headers(headers -> headers
-                                .frameOptions(frameOptions -> frameOptions
-                                        .disable() // 禁用 X-Frame-Options
+                                .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable // 禁用 X-Frame-Options
                                 )
                         // 可选：其他 header 配置
                         // .contentSecurityPolicy(csp -> csp.policyDirectives("..."))
@@ -112,31 +113,29 @@ public class HadokenWebSecurityConfig {
                 )
 
                 // 授权规则
-                .authorizeHttpRequests(authz -> {
-                    authz
-                            // 静态资源、Swagger、Druid、OPTIONS 等放行
-                            .requestMatchers(HttpMethod.GET,
-                                    "/*.html",
-                                    "/**/*.html",
-                                    "/**/*.css",
-                                    "/**/*.js",
-                                    "/ws/**",
-                                    "/wss/**"
-                            ).permitAll()
-                            .requestMatchers(
-                                    "/swagger-ui.html",
-                                    "/doc.html",
-                                    "/swagger-resources/**",
-                                    "/webjars/**",
-                                    "/v3/api-docs"
-                            ).permitAll()
-                            .requestMatchers("/druid/**").permitAll()
-                            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                            .requestMatchers("/**").permitAll()
+                .authorizeHttpRequests(authz -> authz
+                        // 静态资源、Swagger、Druid、OPTIONS 等放行
+                        .requestMatchers(HttpMethod.GET,
+                                "/*.html",
+                                "/**/*.html",
+                                "/**/*.css",
+                                "/**/*.js",
+                                "/ws/**",
+                                "/wss/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/doc.html",
+                                "/swagger-resources/**",
+                                "/webjars/**",
+                                "/v3/api-docs"
+                        ).permitAll()
+                        .requestMatchers("/druid/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/**").permitAll()
 
-                            // 兜底：其余请求必须认证
-                            .anyRequest().authenticated();
-                })
+                        // 兜底：其余请求必须认证
+                        .anyRequest().authenticated())
 
                 // 登出配置
                 .logout(logout -> logout
