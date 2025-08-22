@@ -37,13 +37,13 @@ public class HadokenSchedulerProperties {
     @Data
     public static class Endpoint {
         /**
-         * 是否启用REST管理端点，默认为false
+         * 是否启用REST管理端点，默认为 false
          */
         private boolean enabled = false;
         /**
          * 端点URL前缀
          */
-        private String prefix = "/api/schedule-tasks";
+        private String prefix = "/api/scheduler";
     }
 
     @Data

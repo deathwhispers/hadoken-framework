@@ -2,6 +2,7 @@ package com.hadoken.framework.scheduler.endpoint;
 
 import com.hadoken.framework.scheduler.config.HadokenSchedulerProperties;
 import com.hadoken.framework.scheduler.store.TaskLogStore;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @RestController
-@RequestMapping("${hadoken.scheduler.endpoint.prefix:/light-scheduler}/logs")
+@RequestMapping("${hadoken.scheduler.endpoint.prefix:/api/scheduler}/logs")
 public class SchedulerLogController {
 
     private final TaskLogStore taskLogStore;
@@ -33,7 +34,8 @@ public class SchedulerLogController {
     }
 
 
-    @GetMapping("/tasks/{taskId}")
+    @Operation(summary = "根据 taskId 查询日志")
+    @GetMapping("/{taskId}")
     public ResponseEntity<List<TaskExecutionLogDTO>> getTaskLogs(@PathVariable String taskId,
                                                                  @RequestParam(defaultValue = "100") int size) {
 

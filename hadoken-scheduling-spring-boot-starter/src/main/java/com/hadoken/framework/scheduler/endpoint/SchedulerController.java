@@ -4,6 +4,7 @@ import com.hadoken.framework.scheduler.manager.TaskManager;
 import com.hadoken.framework.scheduler.model.CreateTaskRequestDTO;
 import com.hadoken.framework.scheduler.model.ManagedTask;
 import com.hadoken.framework.scheduler.model.TaskDefinition;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @RestController
-@RequestMapping("${hadoken.scheduler.endpoint.prefix:/light-scheduler}")
+@RequestMapping("${hadoken.scheduler.endpoint.prefix:/api/scheduler}/tasks")
 public class SchedulerController {
 
     private final TaskManager taskManager;
@@ -37,12 +38,14 @@ public class SchedulerController {
                                 LocalDateTime nextExecutionTime) {
     }
 
-    @GetMapping("/tasks")
+    @Operation(summary = "查询所有动态任务")
+    @PostMapping("/list-all")
     public Collection<TaskDetailDTO> getAllTasks() {
         return taskManager.getAllTasks().stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    @GetMapping("/tasks/{id}")
+    @Operation(summary = "查询动态任务")
+    @PostMapping("/tasks/{id}")
     public ResponseEntity<TaskDetailDTO> getTask(@PathVariable String id) {
         return taskManager.getTask(id)
                 .map(this::toDto)
@@ -50,7 +53,8 @@ public class SchedulerController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/tasks/{id}/start")
+    @Operation(summary = "开始任务")
+    @PostMapping("/start/{id}")
     public ResponseEntity<Void> startTask(@PathVariable String id) {
         try {
             taskManager.start(id);
@@ -60,7 +64,8 @@ public class SchedulerController {
         }
     }
 
-    @PostMapping("/tasks/{id}/stop")
+    @Operation(summary = "停止任务")
+    @PostMapping("/stop/{id}")
     public ResponseEntity<Void> stopTask(@PathVariable String id) {
         try {
             taskManager.stop(id);
@@ -70,7 +75,8 @@ public class SchedulerController {
         }
     }
 
-    @PostMapping("/tasks/{id}/trigger")
+    @Operation(summary = "执行一次")
+    @PostMapping("/trigger/{id}")
     public ResponseEntity<Void> triggerTask(@PathVariable String id) {
         try {
             taskManager.triggerOnce(id);
@@ -80,10 +86,8 @@ public class SchedulerController {
         }
     }
 
-    /**
-     * 创建一个动态任务。
-     */
-    @PostMapping("/tasks")
+    @Operation(summary = "创建一个动态任务")
+    @PostMapping("/create")
     public ResponseEntity<TaskDetailDTO> createTask(@RequestBody @Valid CreateTaskRequestDTO requestDTO) {
         try {
             TaskDefinition definition = toDefinition(requestDTO);
@@ -99,10 +103,8 @@ public class SchedulerController {
         }
     }
 
-    /**
-     * 删除一个任务。
-     */
-    @DeleteMapping("/tasks/{id}")
+    @Operation(summary = "删除一个动态任务")
+    @PostMapping("/delete/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable String id) {
         try {
             taskManager.deleteTask(id);
@@ -114,7 +116,6 @@ public class SchedulerController {
         }
     }
 
-    // --- 新增一个DTO到内部模型的转换方法 ---
     private TaskDefinition toDefinition(CreateTaskRequestDTO dto) {
         return TaskDefinition.builder()
                 .id(dto.getId())
@@ -125,7 +126,6 @@ public class SchedulerController {
                 .triggerValue(dto.getTriggerValue())
                 .build();
     }
-
 
     private TaskDetailDTO toDto(ManagedTask task) {
         TaskDefinition def = task.getDefinition();

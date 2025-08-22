@@ -12,6 +12,7 @@ import java.util.List;
 public interface TaskLogStore {
 
     void save(String taskId, TaskExecutionLog log);
+
     List<TaskExecutionLog> findRecent(String taskId, int size);
 
 }

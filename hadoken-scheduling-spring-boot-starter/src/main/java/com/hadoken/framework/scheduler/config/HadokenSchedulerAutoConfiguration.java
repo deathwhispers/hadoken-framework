@@ -53,12 +53,6 @@ public class HadokenSchedulerAutoConfiguration {
     }
 
     /**
-     * 统一的存储配置类
-     * 这个类作为一个整体，清晰地管理了所有关于持久化存储的Bean创建。
-     */
-//    static class UnifiedStoreConfiguration {
-
-    /**
      * 根据配置动态创建唯一的TaskStore Bean。
      * 使用ObjectProvider来安全地、懒加载地获取不同实现所需的依赖。
      */
@@ -112,7 +106,6 @@ public class HadokenSchedulerAutoConfiguration {
         };
     }
 
-
     /**
      * 定义核心的 TaskManager。
      * 它依赖于 Spring 容器中已经存在的全局 TaskScheduler 和我们定义的 TaskStore
@@ -140,13 +133,13 @@ public class HadokenSchedulerAutoConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public SchedulerController schedulerManagementController(TaskManager taskManager) {
+        public SchedulerController schedulerController(TaskManager taskManager) {
             return new SchedulerController(taskManager);
         }
 
         @Bean
         @ConditionalOnMissingBean
-        public SchedulerLogController scheduleLogController(TaskLogStore taskLogStore, HadokenSchedulerProperties properties) {
+        public SchedulerLogController schedulerLogController(TaskLogStore taskLogStore, HadokenSchedulerProperties properties) {
             return new SchedulerLogController(taskLogStore, properties);
         }
     }
