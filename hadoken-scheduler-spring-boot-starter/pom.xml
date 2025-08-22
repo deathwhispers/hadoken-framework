@@ -7,10 +7,10 @@
         <artifactId>hadoken-framework</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>hadoken-scheduling-spring-boot-starter</artifactId>
+    <artifactId>hadoken-scheduler-spring-boot-starter</artifactId>
     <name>${project.artifactId}</name>
 
-    <description>hadoken-scheduling-spring-boot-starter</description>
+    <description>hadoken-scheduler-spring-boot-starter</description>
 
     <dependencies>
         <dependency>

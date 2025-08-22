@@ -611,7 +611,7 @@
             </dependency>
             <dependency>
                 <groupId>com.hadoken.framework</groupId>
-                <artifactId>hadoken-scheduling-spring-boot-starter</artifactId>
+                <artifactId>hadoken-scheduler-spring-boot-starter</artifactId>
                 <version>1.0.0</version>
             </dependency>
             <dependency>

@@ -5,6 +5,7 @@ import com.hadoken.framework.scheduler.model.CreateTaskRequestDTO;
 import com.hadoken.framework.scheduler.model.ManagedTask;
 import com.hadoken.framework.scheduler.model.TaskDefinition;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,11 +17,12 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
- * 为任务管理提供的 API 端点。
+ * 定时任务管理
  *
  * @version 1.0.0
  * Created on 2025/8/22 09:09
  */
+@Tag(name = "定时任务管理")
 @Slf4j
 @RestController
 @RequestMapping("${hadoken.scheduler.endpoint.prefix:/api/scheduler}/tasks")

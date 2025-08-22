@@ -35,7 +35,7 @@
         <module>hadoken-mybatis-spring-boot-starter</module>
         <module>hadoken-redis-spring-boot-starter</module>
         <module>hadoken-security-spring-boot-starter</module>
-        <module>hadoken-scheduling-spring-boot-starter</module>
+        <module>hadoken-scheduler-spring-boot-starter</module>
         <module>hadoken-stats-spring-boot-starter</module>
         <module>hadoken-web-spring-boot-starter</module>
         <module>hadoken-websocket-spring-boot-starter</module>

@@ -3,6 +3,7 @@ package com.hadoken.framework.scheduler.endpoint;
 import com.hadoken.framework.scheduler.config.HadokenSchedulerProperties;
 import com.hadoken.framework.scheduler.store.TaskLogStore;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 定时任务日志管理
+ *
  * @author yanggj
  * @version 1.0.0
  * Created on 2025/8/22 10:29
  */
+@Tag(name = "定时任务日志管理")
 @Slf4j
 @RestController
 @RequestMapping("${hadoken.scheduler.endpoint.prefix:/api/scheduler}/logs")

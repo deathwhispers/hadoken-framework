@@ -18,7 +18,6 @@ import com.hadoken.framework.scheduler.store.redis.RedisTaskLogStore;
 import com.hadoken.framework.scheduler.store.redis.RedisTaskStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -26,11 +25,10 @@ import org.springframework.boot.autoconfigure.task.TaskSchedulingProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 轻量级调度器的核心自动配置类。
@@ -41,6 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created on 2025/8/13 11:22
  */
 @Slf4j
+@EnableScheduling
 @ConditionalOnProperty(name = "hadoken.scheduler.enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({HadokenSchedulerProperties.class, TaskSchedulingProperties.class})
 @Import({HadokenSchedulerConfigurer.class})
@@ -120,28 +119,19 @@ public class HadokenSchedulerAutoConfiguration {
         return new TaskManagerImpl(taskScheduler, taskStore, taskLogStore, this.properties, applicationContext, lockProvider);
     }
 
-    /**
-     * 将Endpoint的配置拆分为两个独立的Bean，职责更清晰
-     * WebApi 自动配置，满足条件时生效
-     * 只有 web servlet 容器时才创建
-     */
-    @Configuration(proxyBeanMethods = false)
+    @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-    @ConditionalOnClass(RestController.class)
-    @ConditionalOnProperty(name = "hadoken.scheduler.endpoint.enabled", havingValue = "true", matchIfMissing = true)
-    static class EndpointsConfiguration {
-
-        @Bean
-        @ConditionalOnMissingBean
-        public SchedulerController schedulerController(TaskManager taskManager) {
-            return new SchedulerController(taskManager);
-        }
-
-        @Bean
-        @ConditionalOnMissingBean
-        public SchedulerLogController schedulerLogController(TaskLogStore taskLogStore, HadokenSchedulerProperties properties) {
-            return new SchedulerLogController(taskLogStore, properties);
-        }
+    @ConditionalOnProperty(name = "hadoken.scheduler.endpoint.enabled", havingValue = "true")
+    public SchedulerController schedulerController(TaskManager taskManager) {
+        return new SchedulerController(taskManager);
     }
 
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+    @ConditionalOnProperty(name = "hadoken.scheduler.endpoint.enabled", havingValue = "true")
+    public SchedulerLogController schedulerLogController(TaskLogStore taskLogStore, HadokenSchedulerProperties properties) {
+        return new SchedulerLogController(taskLogStore, properties);
+    }
 }
