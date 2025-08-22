@@ -1,11 +1,21 @@
 package com.hadoken.framework.scheduler.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hadoken.framework.scheduler.endpoint.SchedulerController;
 import com.hadoken.framework.scheduler.endpoint.SchedulerLogController;
 import com.hadoken.framework.scheduler.lock.DistributedLockProvider;
 import com.hadoken.framework.scheduler.manager.TaskManager;
 import com.hadoken.framework.scheduler.manager.TaskManagerImpl;
-import com.hadoken.framework.scheduler.store.*;
+import com.hadoken.framework.scheduler.store.TaskLogStore;
+import com.hadoken.framework.scheduler.store.TaskStore;
+import com.hadoken.framework.scheduler.store.memory.InMemoryTaskLogStore;
+import com.hadoken.framework.scheduler.store.memory.InMemoryTaskStore;
+import com.hadoken.framework.scheduler.store.mybatis.MybatisTaskLogStore;
+import com.hadoken.framework.scheduler.store.mybatis.MybatisTaskStore;
+import com.hadoken.framework.scheduler.store.mybatis.TaskDefinitionMapper;
+import com.hadoken.framework.scheduler.store.mybatis.TaskLogMapper;
+import com.hadoken.framework.scheduler.store.redis.RedisTaskLogStore;
+import com.hadoken.framework.scheduler.store.redis.RedisTaskStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -18,6 +28,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,36 +53,65 @@ public class HadokenSchedulerAutoConfiguration {
     }
 
     /**
-     * 定义默认的TaskStore Bean (内存实现)。
-     * <p>
-     * {@link ConditionalOnMissingBean} 是关键：如果用户在自己的配置中定义了任何
-     * 一个 {@link TaskStore} 类型的 Bean（无论是 JPA 还是 MyBatis 实现），那么这个默认的Bean就不会被创建。
-     * 这赋予了用户完全的持久化控制权。
+     * 统一的存储配置类
+     * 这个类作为一个整体，清晰地管理了所有关于持久化存储的Bean创建。
+     */
+//    static class UnifiedStoreConfiguration {
+
+    /**
+     * 根据配置动态创建唯一的TaskStore Bean。
+     * 使用ObjectProvider来安全地、懒加载地获取不同实现所需的依赖。
      */
     @Bean
     @ConditionalOnMissingBean(TaskStore.class)
-    public TaskStore taskStore() {
-        log.warn(">>> 未找到持久化的任务存储（TaskStore）Bean。回退到默认的内存任务存储（InMemoryTaskStore）。" +
-                "应用程序重启时，任务定义和状态将会丢失。");
+    public TaskStore taskStore(
+            HadokenSchedulerProperties properties,
+            ObjectProvider<TaskDefinitionMapper> mybatisMapperProvider,
+            ObjectProvider<StringRedisTemplate> redisTemplateProvider,
+            ObjectProvider<ObjectMapper> objectMapperProvider
+    ) {
         HadokenSchedulerProperties.Store.Type type = properties.getStore().getType();
+        log.info(">>> 使用 {} 方式配置定时任务存储", type);
         return switch (type) {
-            case MEMORY -> new InMemoryTaskStore();
-            // todo
-            case JDBC -> new JdbcTaskStore(null);
-//            case REDIS -> new RedisTaskStore();
-            default -> new InMemoryTaskStore();
+            case MYBATIS -> new MybatisTaskStore(mybatisMapperProvider.getIfAvailable());
+            case REDIS -> new RedisTaskStore(
+                    redisTemplateProvider.getIfAvailable(),
+                    properties.getStore().getRedis(),
+                    objectMapperProvider.getIfAvailable(ObjectMapper::new)
+            );
+            case MEMORY -> {
+                log.warn(">>> 任务管理器正在使用内存做为任务存储方式.");
+                yield new InMemoryTaskStore();
+            }
         };
     }
 
+    /**
+     * 根据配置动态创建唯一的TaskLogStore Bean。
+     */
     @Bean
     @ConditionalOnMissingBean(TaskLogStore.class)
-    public TaskLogStore taskLogStore() {
+    public TaskLogStore taskLogStore(
+            HadokenSchedulerProperties properties,
+            ObjectProvider<TaskLogMapper> mybatisLogMapperProvider,
+            ObjectProvider<StringRedisTemplate> redisTemplateProvider,
+            ObjectProvider<ObjectMapper> objectMapperProvider
+    ) {
         HadokenSchedulerProperties.Store.Type type = properties.getStore().getType();
+        log.info(">>> 使用 {} 方式配置 日志存储", type);
         return switch (type) {
-            case MEMORY -> new InMemoryTaskLogStore();
-            default -> new InMemoryTaskLogStore();
+            case MYBATIS -> new MybatisTaskLogStore(mybatisLogMapperProvider.getIfAvailable());
+            case REDIS -> new RedisTaskLogStore(
+                    redisTemplateProvider.getIfAvailable(),
+                    properties.getStore().getRedis(),
+                    objectMapperProvider.getIfAvailable(ObjectMapper::new));
+            case MEMORY -> {
+                log.warn(">>> 任务管理器正在使用内存做为日志存储方式.");
+                yield new InMemoryTaskLogStore();
+            }
         };
     }
+
 
     /**
      * 定义核心的 TaskManager。
@@ -88,7 +128,7 @@ public class HadokenSchedulerAutoConfiguration {
     }
 
     /**
-     * [重构] 将Endpoint的配置拆分为两个独立的Bean，职责更清晰
+     * 将Endpoint的配置拆分为两个独立的Bean，职责更清晰
      * WebApi 自动配置，满足条件时生效
      * 只有 web servlet 容器时才创建
      */

@@ -1,7 +1,8 @@
-package com.hadoken.framework.scheduler.store;
+package com.hadoken.framework.scheduler.store.mybatis;
 
 import com.hadoken.framework.scheduler.enums.TaskStatus;
 import com.hadoken.framework.scheduler.model.TaskDefinition;
+import com.hadoken.framework.scheduler.store.TaskStore;
 
 import java.util.List;
 import java.util.Optional;

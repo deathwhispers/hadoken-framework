@@ -48,7 +48,7 @@ public class HadokenSchedulerProperties {
 
     @Data
     public static class Store {
-        public enum Type {MEMORY, JDBC, MYBATIS, REDIS}
+        public enum Type {MEMORY, MYBATIS, REDIS}
 
         /**
          * 存储类型，默认为内存
@@ -56,7 +56,7 @@ public class HadokenSchedulerProperties {
         private Type type = Type.MEMORY;
 
         private JdbcStoreProperties jdbc = new JdbcStoreProperties();
-        // Redis存储提供独立的配置
+        private MybatisStoreProperties mybatis = new MybatisStoreProperties();
         private RedisStoreProperties redis = new RedisStoreProperties();
     }
 
@@ -98,6 +98,19 @@ public class HadokenSchedulerProperties {
             private String findAll = "SELECT * FROM %s";
             private String deleteById = "DELETE FROM %s WHERE id = ?";
         }
+    }
+
+    @Data
+    public static class MybatisStoreProperties {
+        /**
+         * 任务调度定义表名
+         */
+        private String definitionTableName = "t_schedule_task_definition";
+        /**
+         * 任务调度日志表名
+         */
+        private String logTableName = "t_schedule_task_log";
+
     }
 
     /**

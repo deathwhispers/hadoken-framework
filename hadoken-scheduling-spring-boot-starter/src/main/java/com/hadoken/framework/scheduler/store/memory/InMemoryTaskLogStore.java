@@ -1,6 +1,7 @@
-package com.hadoken.framework.scheduler.store;
+package com.hadoken.framework.scheduler.store.memory;
 
 import com.hadoken.framework.scheduler.model.TaskExecutionLog;
+import com.hadoken.framework.scheduler.store.TaskLogStore;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,7 +20,7 @@ public class InMemoryTaskLogStore implements TaskLogStore {
     @Override
     public void save(String taskId, TaskExecutionLog log) {
         Queue<TaskExecutionLog> logs = logRegistry.computeIfAbsent(taskId, k -> new ConcurrentLinkedQueue<>());
-        if (logs.size() >= 100) { // Can be configured
+        if (logs.size() >= 100) {
             logs.poll();
         }
         logs.offer(log);

@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -32,15 +31,10 @@ public class SchedulerController {
         this.taskManager = taskManager;
     }
 
-    // DTOs for API responses
     public record TaskDetailDTO(String id, String description, String sourceType, String triggerType,
                                 String triggerValue, String status, LocalDateTime lastExecutionTime,
                                 Long successCount, Long failureCount, Long avgExecutionTimeMillis,
                                 LocalDateTime nextExecutionTime) {
-    }
-
-    public record TaskExecutionLogDTO(Instant startTime, long durationMillis, boolean success,
-                                      String errorMessage, String instanceId) {
     }
 
     @GetMapping("/tasks")

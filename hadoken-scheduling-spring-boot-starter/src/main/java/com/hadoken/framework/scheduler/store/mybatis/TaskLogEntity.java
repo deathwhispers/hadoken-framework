@@ -1,4 +1,4 @@
-package com.hadoken.framework.scheduler.store;
+package com.hadoken.framework.scheduler.store.mybatis;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

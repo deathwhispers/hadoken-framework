@@ -1,6 +1,5 @@
-package com.hadoken.framework.scheduler.store;
+package com.hadoken.framework.scheduler.store.mybatis;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.hadoken.framework.scheduler.enums.TaskSourceType;
@@ -18,7 +17,7 @@ import lombok.Data;
  * Created on 2025/8/22 10:54
  */
 @Data
-@TableName("${hadoken.scheduler.store.jdbc.definition-table-name}")
+@TableName("${hadoken.scheduler.store.mybatis.definition-table-name:t_schedule_task_definition}")
 public class TaskDefinitionEntity {
 
     @TableId

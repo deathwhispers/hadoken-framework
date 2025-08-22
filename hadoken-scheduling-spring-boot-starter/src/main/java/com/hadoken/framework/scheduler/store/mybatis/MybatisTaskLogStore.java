@@ -1,7 +1,8 @@
-package com.hadoken.framework.scheduler.store;
+package com.hadoken.framework.scheduler.store.mybatis;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hadoken.framework.scheduler.model.TaskExecutionLog;
+import com.hadoken.framework.scheduler.store.TaskLogStore;
 
 import java.util.List;
 import java.util.stream.Collectors;

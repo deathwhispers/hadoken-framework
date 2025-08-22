@@ -7,7 +7,6 @@ import org.springframework.boot.convert.DurationStyle;
 import org.springframework.util.StringUtils;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -103,7 +102,7 @@ public class MonitoredTaskWrapper implements Runnable {
             managedTask.getOriginalRunnable().run();
 
             // 任务成功执行
-            Duration duration = Duration.between(startTime, Instant.now());
+            Duration duration = Duration.between(startTime, LocalDateTime.now());
             log.info("任务 '{}' 在 {}ms 内成功完成执行。",
                     managedTask.getDefinition().getId(), duration.toMillis());
 
@@ -115,7 +114,7 @@ public class MonitoredTaskWrapper implements Runnable {
             log.error("任务 '{}' 执行失败.", managedTask.getDefinition().getId(), t);
 
             if (startTime != null) {
-                Duration duration = Duration.between(startTime, Instant.now());
+                Duration duration = Duration.between(startTime, LocalDateTime.now());
                 // 更新统计信息
                 managedTask.updateOnFailure(duration, t);
             }

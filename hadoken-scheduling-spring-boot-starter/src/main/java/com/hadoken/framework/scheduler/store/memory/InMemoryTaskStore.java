@@ -1,7 +1,8 @@
-package com.hadoken.framework.scheduler.store;
+package com.hadoken.framework.scheduler.store.memory;
 
 import com.hadoken.framework.scheduler.enums.TaskStatus;
 import com.hadoken.framework.scheduler.model.TaskDefinition;
+import com.hadoken.framework.scheduler.store.TaskStore;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
