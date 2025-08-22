@@ -1,1 +1,1 @@
-com.hadoken.framework.scheduling.config.ScheduleManagerAutoConfiguration
+com.hadoken.framework.scheduling.config.HadokenSchedulerAutoConfiguration

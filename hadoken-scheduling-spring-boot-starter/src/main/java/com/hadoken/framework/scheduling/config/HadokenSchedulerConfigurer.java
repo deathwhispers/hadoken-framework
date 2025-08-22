@@ -39,15 +39,15 @@ import java.util.*;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-public class ScheduleManagerConfigurer implements SchedulingConfigurer {
+public class HadokenSchedulerConfigurer implements SchedulingConfigurer {
 
     private final TaskManager taskManager;
     private final ApplicationContext applicationContext;
-    private final ScheduleManagerProperties properties;
+    private final HadokenSchedulerProperties properties;
 
-    public ScheduleManagerConfigurer(TaskManager taskManager,
-                                     ApplicationContext applicationContext,
-                                     ScheduleManagerProperties properties) {
+    public HadokenSchedulerConfigurer(TaskManager taskManager,
+                                      ApplicationContext applicationContext,
+                                      HadokenSchedulerProperties properties) {
         this.taskManager = taskManager;
         this.applicationContext = applicationContext;
         this.properties = properties;

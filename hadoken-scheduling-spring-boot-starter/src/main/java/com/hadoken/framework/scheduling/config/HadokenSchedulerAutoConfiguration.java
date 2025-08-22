@@ -1,20 +1,25 @@
 package com.hadoken.framework.scheduling.config;
 
+import com.hadoken.framework.scheduling.endpoint.ScheduleManagementController;
 import com.hadoken.framework.scheduling.lock.DistributedLockProvider;
 import com.hadoken.framework.scheduling.manager.TaskManager;
 import com.hadoken.framework.scheduling.manager.TaskManagerImpl;
 import com.hadoken.framework.scheduling.store.InMemoryTaskStore;
+import com.hadoken.framework.scheduling.store.JdbcTaskStore;
 import com.hadoken.framework.scheduling.store.TaskStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.task.TaskSchedulingProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 轻量级调度器的核心自动配置类。
@@ -25,15 +30,14 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
  * Created on 2025/8/13 11:22
  */
 @Slf4j
-@ConditionalOnProperty(name = "schedule.manager.enabled", havingValue = "true", matchIfMissing = true)
-@EnableConfigurationProperties({ScheduleManagerProperties.class, TaskSchedulingProperties.class})
-// 【核心修正】: 导入 ScheduleManagerConfigurer 和 Endpoint，不再需要导入 PostProcessor
-@Import({ScheduleManagerConfigurer.class, ScheduleManagerEndpointConfiguration.class})
-public class ScheduleManagerAutoConfiguration {
+@ConditionalOnProperty(name = "hadoken.scheduler.enabled", havingValue = "true", matchIfMissing = true)
+@EnableConfigurationProperties({HadokenSchedulerProperties.class, TaskSchedulingProperties.class})
+@Import({HadokenSchedulerConfigurer.class})
+public class HadokenSchedulerAutoConfiguration {
 
-    private final ScheduleManagerProperties properties;
+    private final HadokenSchedulerProperties properties;
 
-    public ScheduleManagerAutoConfiguration(ScheduleManagerProperties properties) {
+    public HadokenSchedulerAutoConfiguration(HadokenSchedulerProperties properties) {
         this.properties = properties;
     }
 
@@ -44,6 +48,20 @@ public class ScheduleManagerAutoConfiguration {
      * 一个 {@link TaskStore} 类型的 Bean（无论是 JPA 还是 MyBatis 实现），那么这个默认的Bean就不会被创建。
      * 这赋予了用户完全的持久化控制权。
      */
+    @Bean
+    @ConditionalOnMissingBean(TaskStore.class)
+    public TaskStore taskStore() {
+        log.warn(">>> 未找到持久化的任务存储（TaskStore）Bean。回退到默认的内存任务存储（InMemoryTaskStore）。" +
+                "应用程序重启时，任务定义和状态将会丢失。");
+        HadokenSchedulerProperties.Store.Type type = properties.getStore().getType();
+        return switch (type) {
+            case MEMORY -> new InMemoryTaskStore();
+            case JDBC -> new JdbcTaskStore();
+            case REDIS -> new InMemoryTaskStore();
+            default -> new InMemoryTaskStore();
+        };
+    }
+
     @Bean
     @ConditionalOnMissingBean(TaskStore.class)
     public TaskStore taskStore() {
@@ -66,4 +84,16 @@ public class ScheduleManagerAutoConfiguration {
         return new TaskManagerImpl(taskScheduler, taskStore, properties, applicationContext, lockProvider);
     }
 
+    /**
+     * WebApi 自动配置，满足条件时生效
+     * 只有 web servlet 容器时才创建
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+    @ConditionalOnClass(RestController.class)
+    @ConditionalOnProperty(name = "hadoken.scheduler.endpoint.enabled", havingValue = "true", matchIfMissing = true)
+    public ScheduleManagementController schedulerManagementController(TaskManager taskManager) {
+        return new ScheduleManagementController(taskManager);
+    }
 }

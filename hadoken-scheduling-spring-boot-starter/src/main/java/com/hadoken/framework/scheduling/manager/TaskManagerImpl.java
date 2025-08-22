@@ -1,6 +1,6 @@
 package com.hadoken.framework.scheduling.manager;
 
-import com.hadoken.framework.scheduling.config.ScheduleManagerProperties;
+import com.hadoken.framework.scheduling.config.HadokenSchedulerProperties;
 import com.hadoken.framework.scheduling.enums.TaskSourceType;
 import com.hadoken.framework.scheduling.enums.TaskStatus;
 import com.hadoken.framework.scheduling.lock.DistributedLockProvider;
@@ -41,14 +41,14 @@ public class TaskManagerImpl implements TaskManager {
 
     private final ThreadPoolTaskScheduler taskScheduler;
     private final TaskStore taskStore;
-    private final ScheduleManagerProperties properties;
+    private final HadokenSchedulerProperties properties;
     private final ApplicationContext applicationContext;
     private final String instanceId;
     private final Optional<DistributedLockProvider> lockProviderOpt;
     // 运行时的任务实例缓存
 
     public TaskManagerImpl(ThreadPoolTaskScheduler taskScheduler, TaskStore taskStore,
-                           ScheduleManagerProperties properties, ApplicationContext applicationContext,
+                           HadokenSchedulerProperties properties, ApplicationContext applicationContext,
                            ObjectProvider<DistributedLockProvider> lockProvider) {
         this.taskScheduler = taskScheduler;
         this.taskStore = taskStore;

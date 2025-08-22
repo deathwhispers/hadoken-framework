@@ -44,8 +44,6 @@ public class ManagedTask {
      */
     private final Runnable runnable;
 
-    // --- 运行时易变状态 ---
-
     /**
      * Spring调度器返回的Future，用于取消任务。
      */
