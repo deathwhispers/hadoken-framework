@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hadoken.framework.stats.mapper.StatisticAggregatedDataMapper">
+
+    <select id="queryStatistics" resultType="java.util.Map">
+        SELECT
+        statistic_time,
+        <foreach collection="dimensions" item="dim" separator=",">
+            JSON_UNQUOTE(JSON_EXTRACT(dimensions, concat('$.', #{dim}))) AS `${dim}`
+        </foreach>
+        <if test="dimensions != null and dimensions.size() > 0 and metrics != null and metrics.size() > 0">
+            ,
+        </if>
+        <foreach collection="metrics" item="metric" separator=",">
+            JSON_UNQUOTE(JSON_EXTRACT(metrics, concat('$.', #{metric}))) AS `${metric}`
+        </foreach>
+        FROM statistic_aggregated_data
+        WHERE biz_type = #{bizType}
+        AND time_granularity = #{timeGranularity}
+        AND statistic_time BETWEEN #{startTime} AND #{endTime}
+        <if test="filters != null and filters.size() > 0">
+            <foreach collection="filters.keySet()" item="key">
+                AND JSON_EXTRACT(dimensions, concat('$.', #{key})) = #{filters.get(key)}
+            </foreach>
+        </if>
+    </select>
+</mapper>
