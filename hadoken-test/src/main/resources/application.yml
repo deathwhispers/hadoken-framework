@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: hadoken-test
+  data:
+    redis:
+      host: 1.95.210.119
+      database: 10
+      port: 6379
+      password: Allen@rhy&0825#21
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://1.95.210.119:3306/tcas?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&autoReconnect=true&failOverReadOnly=false&allowPublicKeyRetrieval=true
+    username: root
+    password: Allen@rhy_2021#825
+    hikari:
+      minimum-idle: 10
+      min-idle: 10
+      max-pool-size: 20
+      connection-timeout: 3000
+      idle-timeout: 18000
+      connection-init-sql: select 1
+hadoken:
+  scheduler:
+    enabled: true
+    endpoint:
+      enabled: true
+      prefix: /api/test
+    store:
+      type: redis

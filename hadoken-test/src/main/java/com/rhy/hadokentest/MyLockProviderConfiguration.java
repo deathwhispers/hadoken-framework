@@ -1,6 +1,6 @@
 package com.rhy.hadokentest;
 
-import com.hadoken.framework.scheduling.lock.DistributedLockProvider;
+import com.hadoken.framework.scheduler.lock.DistributedLockProvider;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.context.annotation.Bean;
