@@ -29,9 +29,16 @@ import java.time.Duration;
 import java.util.*;
 
 /**
- * 实现了SchedulingConfigurer的配置类。
- * 职责：作为Spring调度的“挂钩”，拦截、包装并重新注册所有@Scheduled任务。
+ * 实现了 SchedulingConfigurer 的配置类。
+ * 职责：作为Spring调度的“挂钩”，拦截、包装并重新注册所有 @Scheduled 任务。
  * 它清晰地依赖于TaskManager，由Spring容器保证注入顺序，从而打破循环依赖。
+ * <p>
+ * SchedulingConfigurer的作用：是 Spring 调度体系对外开放的一个“配置后门”，
+ * 当你实现了这个接口，Spring Boot 在初始化调度模块时，会给你一个回调。
+ * 在这个回调方法 configureTasks(ScheduledTaskRegistrar taskRegistrar) 里，
+ * Spring 会把它辛辛苦苦扫描到的所有定时任务（不管是 cron、fixedRate 还是 fixedDelay 的），
+ * 都打包好放在 ScheduledTaskRegistrar 对象里，然后恭恭敬敬地递给你，说：“大佬，这是我找到的所有任务，
+ * 您过目一下。您看看是想改点啥，还是想加点啥，您说了算。您配置完了，我再拿去执行。”
  *
  * @author yanggj
  * @version 1.0.0
@@ -55,7 +62,22 @@ public class HadokenSchedulerConfigurer implements SchedulingConfigurer {
 
     /**
      * 这是SchedulingConfigurer接口要求实现的方法。
+     * <p>
      * Spring在处理完所有@Scheduled注解后，会调用此方法，并将包含所有已发现任务的registrar传递给我们。
+     * taskRegistrar 对象里，明明白白地放着三个列表：
+     * <ol>
+     *   <li>getTriggerTaskList(),</li>
+     *   <li>getFixedRateTaskList(),</li>
+     *   <li>getFixedDelayTaskList()。</li>
+     * </ol>
+     * Spring 找到的所有定时任务，都分门别类地躺在里面。
+     * <p>
+     * 这意味着，我拿到了：
+     * <ul>
+     *   <li>原始的 Runnable：也就是你写的那个被 @Scheduled 注解的业务方法。</li>
+     *   <li>原始的 Trigger：也就是 Spring 根据你的 cron 或 fixedRate 表达式解析出来的触发器。</li>
+     * </ul>
+     * 有了这两样东西，我就拥有了完全的控制权。
      */
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
