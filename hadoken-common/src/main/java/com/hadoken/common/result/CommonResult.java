@@ -23,7 +23,7 @@ public class CommonResult<T> implements Serializable {
     /**
      * 错误码
      *
-     * @see ErrorCode#getCode()
+     * @see ErrorCode#code()
      */
     private Integer code;
 
@@ -35,7 +35,7 @@ public class CommonResult<T> implements Serializable {
     /**
      * 错误提示信息
      *
-     * @see ErrorCode#getMsg()
+     * @see ErrorCode#msg()
      */
     private String msg;
 
@@ -44,7 +44,7 @@ public class CommonResult<T> implements Serializable {
     }
 
     public static <T> CommonResult<T> error(Integer code, String message) {
-        Assert.isTrue(!GlobalErrorCodeConstants.SUCCESS.getCode().equals(code), "code 必须是错误的！");
+        Assert.isTrue(!GlobalErrorCodeConstants.SUCCESS.code().equals(code), "code 必须是错误的！");
         CommonResult<T> result = new CommonResult<>();
         result.code = code;
         result.msg = message;
@@ -52,19 +52,19 @@ public class CommonResult<T> implements Serializable {
     }
 
     public static <T> CommonResult<T> error(ErrorCode errorCode) {
-        return error(errorCode.getCode(), errorCode.getMsg());
+        return error(errorCode.code(), errorCode.msg());
     }
 
     public static <T> CommonResult<T> success(T data) {
         CommonResult<T> result = new CommonResult<>();
-        result.code = GlobalErrorCodeConstants.SUCCESS.getCode();
+        result.code = GlobalErrorCodeConstants.SUCCESS.code();
         result.data = data;
         result.msg = "";
         return result;
     }
 
     public static boolean isSuccess(Integer code) {
-        return Objects.equals(code, GlobalErrorCodeConstants.SUCCESS.getCode());
+        return Objects.equals(code, GlobalErrorCodeConstants.SUCCESS.code());
     }
 
     // 避免 jackson 序列化

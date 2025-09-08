@@ -1,5 +1,7 @@
 package com.hadoken.common.entity;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ import java.io.Serializable;
  * @version 1.0.0
  * @date 2022/02/28 15:54
  */
+@Getter
 public class SortingField implements Serializable {
 
     /**
@@ -39,17 +42,9 @@ public class SortingField implements Serializable {
         this.order = order;
     }
 
-    public String getField() {
-        return field;
-    }
-
     public SortingField setField(String field) {
         this.field = field;
         return this;
-    }
-
-    public String getOrder() {
-        return order;
     }
 
     public SortingField setOrder(String order) {

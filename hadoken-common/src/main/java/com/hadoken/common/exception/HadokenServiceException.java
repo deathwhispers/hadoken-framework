@@ -1,6 +1,7 @@
 package com.hadoken.common.exception;
 
 import com.hadoken.common.exception.enums.ServiceErrorCodeRange;
+import lombok.Getter;
 
 /**
  * hadoken 业务异常
@@ -16,6 +17,7 @@ public final class HadokenServiceException extends RuntimeException {
      *
      * @see ServiceErrorCodeRange
      */
+    @Getter
     private Integer code;
     /**
      * 错误提示
@@ -29,18 +31,13 @@ public final class HadokenServiceException extends RuntimeException {
     }
 
     public HadokenServiceException(ErrorCode errorCode) {
-        this.code = errorCode.getCode();
-        this.message = errorCode.getMsg();
+        this.code = errorCode.code();
+        this.message = errorCode.msg();
     }
 
     public HadokenServiceException(Integer code, String message) {
         this.code = code;
         this.message = message;
-    }
-
-
-    public Integer getCode() {
-        return code;
     }
 
     public HadokenServiceException setCode(Integer code) {
