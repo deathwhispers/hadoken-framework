@@ -2,7 +2,7 @@ package com.hadoken.framework.mybatis.core.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.hadoken.framework.mybatis.core.entity.BaseDO;
-import com.hadoken.framework.web.core.util.WebUtils;
+import com.hadoken.framework.web.mvc.core.util.WebUtils;
 import org.apache.ibatis.reflection.MetaObject;
 
 import java.time.LocalDateTime;
