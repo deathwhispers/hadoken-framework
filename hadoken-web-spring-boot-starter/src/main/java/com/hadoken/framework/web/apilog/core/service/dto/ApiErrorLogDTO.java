@@ -3,7 +3,6 @@ package com.hadoken.framework.web.apilog.core.service.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -12,11 +11,9 @@ import java.time.LocalDateTime;
  *
  * @author yanggj
  * @version 1.0.0
- * @date 2022/03/02 9:27
  */
 @Schema(description = "API 错误日志")
 @Data
-@Accessors(chain = true)
 public class ApiErrorLogDTO {
 
     /**

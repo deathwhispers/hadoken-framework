@@ -3,20 +3,17 @@ package com.hadoken.framework.web.apilog.core.service.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
- * API 错误日志创建 DTO
+ * API 访问日志创建 DTO
  *
  * @author yanggj
  * @version 1.0.0
- * @date 2022/03/02 9:27
  */
-@Schema(description = "API 错误日志")
+@Schema(description = "API 访问日志")
 @Data
-@Accessors(chain = true)
 public class ApiAccessLogDTO {
 
     /**
@@ -26,16 +23,10 @@ public class ApiAccessLogDTO {
     private String traceId;
 
     /**
-     * 用户编号
+     * 用户 id
      */
-    @Schema(description = "账号编号")
+    @Schema(description = "用户 id")
     private Long userId;
-
-    /**
-     * 用户类型
-     */
-    @Schema(description = "用户类型")
-    private Integer userType;
 
     /**
      * 应用名
@@ -68,28 +59,21 @@ public class ApiAccessLogDTO {
      * 用户 IP
      */
     @Schema(description = "用户 IP")
-    @NotNull(message = "ip 不能为空")
     private String userIp;
-
-    /**
-     * 浏览器 UA
-     */
-    @Schema(description = "浏览器 UA")
-    private String userAgent;
 
     /**
      * 开始请求时间
      */
     @Schema(description = "开始请求时间")
     @NotNull(message = "开始请求时间不能为空")
-    private Date beginTime;
+    private LocalDateTime beginTime;
 
     /**
      * 结束请求时间
      */
     @Schema(description = "结束请求时间")
     @NotNull(message = "结束请求时间不能为空")
-    private Date endTime;
+    private LocalDateTime endTime;
 
     /**
      * 执行时长，单位：毫秒
@@ -110,5 +94,8 @@ public class ApiAccessLogDTO {
      */
     @Schema(description = "结果提示")
     private String resultMsg;
+
+    @Schema(description = "响应")
+    private String responsePayload;
 
 }

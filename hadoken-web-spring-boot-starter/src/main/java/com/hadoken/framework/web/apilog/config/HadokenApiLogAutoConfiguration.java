@@ -2,16 +2,16 @@ package com.hadoken.framework.web.apilog.config;
 
 import com.hadoken.common.enums.WebFilterOrderEnum;
 import com.hadoken.framework.web.apilog.core.filter.ApiAccessLogFilter;
-import com.hadoken.framework.web.apilog.core.service.ApiAccessLogFrameworkService;
+import com.hadoken.framework.web.apilog.core.service.ApiAccessLogService;
+import com.hadoken.framework.web.apilog.core.service.DefaultApiAccessLogService;
 import com.hadoken.framework.web.mvc.config.HadokenWebAutoConfiguration;
-import com.hadoken.framework.web.mvc.config.WebProperties;
-import jakarta.servlet.Filter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Api 日志自动配置类
@@ -20,25 +20,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @version 1.0.0
  * @date 2022/03/02 9:19
  */
+@Slf4j
 @AutoConfiguration(after = HadokenWebAutoConfiguration.class)
-public class HadokenApiLogAutoConfiguration implements WebMvcConfigurer {
+@ConditionalOnProperty(prefix = "hadoken.web.api-log", name = "enabled", havingValue = "true")
+public class HadokenApiLogAutoConfiguration {
+
 
     /**
      * 创建 ApiAccessLogFilter Bean，记录 API 请求日志
      */
     @Bean
-    @ConditionalOnProperty(prefix = "hadoken.access-log", value = "enable", matchIfMissing = false)
-    public FilterRegistrationBean<ApiAccessLogFilter> apiAccessLogFilter(WebProperties webProperties,
-                                                                         @Value("${spring.application.name}") String applicationName,
-                                                                         ApiAccessLogFrameworkService apiAccessLogFrameworkService) {
-        ApiAccessLogFilter filter = new ApiAccessLogFilter(webProperties, applicationName, apiAccessLogFrameworkService);
-        return createFilterBean(filter, WebFilterOrderEnum.API_ACCESS_LOG_FILTER);
+    public FilterRegistrationBean<ApiAccessLogFilter> apiAccessLogFilter(@Value("${spring.application.name}") String applicationName,
+                                                                         ApiAccessLogService apiAccessLogService) {
+        ApiAccessLogFilter filter = new ApiAccessLogFilter(applicationName, apiAccessLogService);
+        FilterRegistrationBean<ApiAccessLogFilter> bean = new FilterRegistrationBean<>(filter);
+        bean.setOrder(WebFilterOrderEnum.API_ACCESS_LOG_FILTER);
+        return bean;
     }
 
-    private static <T extends Filter> FilterRegistrationBean<T> createFilterBean(T filter, Integer order) {
-        FilterRegistrationBean<T> bean = new FilterRegistrationBean<>(filter);
-        bean.setOrder(order);
-        return bean;
+    /**
+     * 创建默认的API访问日志服务实现
+     * 当用户没有自定义实现时使用这个默认实现
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ApiAccessLogService defaultApiAccessLogService() {
+        // 默认实现可以是空实现，或者简单打印日志
+        return new DefaultApiAccessLogService();
     }
 
 }

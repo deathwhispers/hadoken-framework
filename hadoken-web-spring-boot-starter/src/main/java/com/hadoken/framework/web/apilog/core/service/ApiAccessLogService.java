@@ -8,9 +8,8 @@ import jakarta.validation.Valid;
  *
  * @author yanggj
  * @version 1.0.0
- * @date 2022/03/02 9:28
  */
-public interface ApiAccessLogFrameworkService {
+public interface ApiAccessLogService {
 
     /**
      * 创建 API 访问日志
