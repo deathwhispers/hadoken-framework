@@ -1,7 +1,7 @@
 package com.hadoken.framework.web.desensitize.core.slider.handler;
 
-import cn.iocoder.yudao.framework.common.util.spring.SpringExpressionUtils;
-import cn.iocoder.yudao.framework.desensitize.core.base.handler.DesensitizationHandler;
+import com.hadoken.common.util.spring.SpringExpressionUtils;
+import com.hadoken.framework.web.desensitize.core.base.handler.DesensitizationHandler;
 
 import java.lang.annotation.Annotation;
 

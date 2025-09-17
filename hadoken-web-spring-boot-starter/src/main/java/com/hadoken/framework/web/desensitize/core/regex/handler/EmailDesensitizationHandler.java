@@ -1,6 +1,6 @@
 package com.hadoken.framework.web.desensitize.core.regex.handler;
 
-import cn.iocoder.yudao.framework.desensitize.core.regex.annotation.EmailDesensitize;
+import com.hadoken.framework.web.desensitize.core.regex.annotation.EmailDesensitize;
 
 /**
  * {@link EmailDesensitize} 的脱敏处理器

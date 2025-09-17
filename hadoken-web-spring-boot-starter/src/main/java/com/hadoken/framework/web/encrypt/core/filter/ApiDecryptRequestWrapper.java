@@ -17,8 +17,6 @@ import java.io.InputStreamReader;
 
 /**
  * 解密请求 {@link HttpServletRequestWrapper} 实现类
- *
- * @author 芋道源码
  */
 public class ApiDecryptRequestWrapper extends HttpServletRequestWrapper {
 
@@ -29,8 +27,7 @@ public class ApiDecryptRequestWrapper extends HttpServletRequestWrapper {
                                     AsymmetricDecryptor asymmetricDecryptor) throws IOException {
         super(request);
         // 读取 body，允许 HEX、BASE64 传输
-        String requestBody = StrUtil.utf8Str(
-                IoUtil.readBytes(request.getInputStream(), false));
+        String requestBody = StrUtil.utf8Str(IoUtil.readBytes(request.getInputStream(), false));
 
         // 解密 body
         body = symmetricDecryptor != null ? symmetricDecryptor.decrypt(requestBody)

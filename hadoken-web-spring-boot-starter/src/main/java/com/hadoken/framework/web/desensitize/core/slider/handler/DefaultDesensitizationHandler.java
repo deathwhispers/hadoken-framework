@@ -1,6 +1,7 @@
 package com.hadoken.framework.web.desensitize.core.slider.handler;
 
-import cn.iocoder.yudao.framework.desensitize.core.slider.annotation.SliderDesensitize;
+
+import com.hadoken.framework.web.desensitize.core.slider.annotation.SliderDesensitize;
 
 /**
  * {@link SliderDesensitize} 的脱敏处理器

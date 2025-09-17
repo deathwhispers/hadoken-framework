@@ -13,11 +13,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 
-
 @AutoConfiguration
 @Slf4j
 @EnableConfigurationProperties(ApiEncryptProperties.class)
-@ConditionalOnProperty(prefix = "yudao.api-encrypt", name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = "hadoken.api-encrypt", name = "enable", havingValue = "true")
 public class HadokenApiEncryptAutoConfiguration {
 
     @Bean

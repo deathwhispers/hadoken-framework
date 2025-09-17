@@ -1,8 +1,8 @@
 package com.hadoken.framework.web.desensitize.core.regex.annotation;
 
-import cn.iocoder.yudao.framework.desensitize.core.base.annotation.DesensitizeBy;
-import cn.iocoder.yudao.framework.desensitize.core.regex.handler.EmailDesensitizationHandler;
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
+import com.hadoken.framework.web.desensitize.core.base.annotation.DesensitizeBy;
+import com.hadoken.framework.web.desensitize.core.regex.handler.EmailDesensitizationHandler;
 
 import java.lang.annotation.*;
 

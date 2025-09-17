@@ -1,8 +1,8 @@
 package com.hadoken.framework.web.desensitize.core.slider.annotation;
 
-import cn.iocoder.yudao.framework.desensitize.core.base.annotation.DesensitizeBy;
-import cn.iocoder.yudao.framework.desensitize.core.slider.handler.BankCardDesensitization;
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
+import com.hadoken.framework.web.desensitize.core.base.annotation.DesensitizeBy;
+import com.hadoken.framework.web.desensitize.core.slider.handler.BankCardDesensitization;
 
 import java.lang.annotation.*;
 

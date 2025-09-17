@@ -1,6 +1,7 @@
 package com.hadoken.framework.web.desensitize.core.slider.handler;
 
-import cn.iocoder.yudao.framework.desensitize.core.slider.annotation.FixedPhoneDesensitize;
+
+import com.hadoken.framework.web.desensitize.core.slider.annotation.FixedPhoneDesensitize;
 
 /**
  * {@link FixedPhoneDesensitize} 的脱敏处理器

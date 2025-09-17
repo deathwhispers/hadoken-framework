@@ -1,6 +1,6 @@
 package com.hadoken.framework.web.desensitize.core.slider.handler;
 
-import cn.iocoder.yudao.framework.desensitize.core.slider.annotation.BankCardDesensitize;
+import com.hadoken.framework.web.desensitize.core.slider.annotation.BankCardDesensitize;
 
 /**
  * {@link BankCardDesensitize} 的脱敏处理器

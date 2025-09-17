@@ -1,6 +1,6 @@
 package com.hadoken.framework.web.mvc.core.filter;
 
-import com.hadoken.framework.web.mvc.core.util.ServletUtils;
+import com.hadoken.common.util.ServletUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

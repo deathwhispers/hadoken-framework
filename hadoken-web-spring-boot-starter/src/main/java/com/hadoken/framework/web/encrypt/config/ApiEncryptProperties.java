@@ -7,11 +7,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * HTTP API 加解密配置
- *
- * @author 芋道源码
+ * API 加解密配置
  */
-@ConfigurationProperties(prefix = "yudao.api-encrypt")
+@ConfigurationProperties(prefix = "hadoken.api-encrypt")
 @Validated
 @Data
 public class ApiEncryptProperties {
@@ -24,23 +22,24 @@ public class ApiEncryptProperties {
 
     /**
      * 请求头（响应头）名称
-     *
-     * 1. 如果该请求头非空，则表示请求参数已被「前端」加密，「后端」需要解密
-     * 2. 如果该响应头非空，则表示响应结果已被「后端」加密，「前端」需要解密
+     * <ul>
+     * <li>1. 如果该请求头非空，则表示请求参数已被「前端」加密，「后端」需要解密</li>
+     * <li>2. 如果该响应头非空，则表示响应结果已被「后端」加密，「前端」需要解密</li>
+     * </ul>
      */
     @NotEmpty(message = "请求头（响应头）名称不能为空")
     private String header = "X-Api-Encrypt";
 
     /**
      * 对称加密算法，用于请求/响应的加解密
-     *
+     * <p>
      * 目前支持
      * 【对称加密】：
-     *      1. {@link cn.hutool.crypto.symmetric.SymmetricAlgorithm#AES}
-     *      2. {@link cn.hutool.crypto.symmetric.SM4#ALGORITHM_NAME} （需要自己二次开发，成本低）
+     * 1. {@link cn.hutool.crypto.symmetric.SymmetricAlgorithm#AES}
+     * 2. {@link cn.hutool.crypto.symmetric.SM4#ALGORITHM_NAME} （需要自己二次开发，成本低）
      * 【非对称加密】
-     *      1. {@link cn.hutool.crypto.asymmetric.AsymmetricAlgorithm#RSA}
-     *      2. {@link cn.hutool.crypto.asymmetric.SM2} （需要自己二次开发，成本低）
+     * 1. {@link cn.hutool.crypto.asymmetric.AsymmetricAlgorithm#RSA}
+     * 2. {@link cn.hutool.crypto.asymmetric.SM2} （需要自己二次开发，成本低）
      *
      * @see <a href="https://help.aliyun.com/zh/ssl-certificate/what-are-a-public-key-and-a-private-key">什么是公钥和私钥？</a>
      */
@@ -49,7 +48,7 @@ public class ApiEncryptProperties {
 
     /**
      * 请求的解密密钥
-     *
+     * <p>
      * 注意：
      * 1. 如果是【对称加密】时，它「后端」对应的是“密钥”。对应的，「前端」也对应的也是“密钥”。
      * 2. 如果是【非对称加密】时，它「后端」对应的是“私钥”。对应的，「前端」对应的是“公钥”。（重要！！！）
@@ -59,7 +58,7 @@ public class ApiEncryptProperties {
 
     /**
      * 响应的加密密钥
-     *
+     * <p>
      * 注意：
      * 1. 如果是【对称加密】时，它「后端」对应的是“密钥”。对应的，「前端」也对应的也是“密钥”。
      * 2. 如果是【非对称加密】时，它「后端」对应的是“公钥”。对应的，「前端」对应的是“私钥”。（重要！！！）

@@ -5,9 +5,9 @@ import com.hadoken.common.exception.HadokenServiceException;
 import com.hadoken.common.result.CommonResult;
 import com.hadoken.common.util.json.JsonUtils;
 import com.hadoken.common.util.monitor.TracerUtils;
-import com.hadoken.framework.web.apilog.core.service.ApiErrorLogFrameworkService;
+import com.hadoken.framework.web.apilog.core.service.ApiErrorLogService;
 import com.hadoken.framework.web.apilog.core.service.dto.ApiErrorLogDTO;
-import com.hadoken.framework.web.mvc.core.util.WebUtils;
+import com.hadoken.common.util.WebUtils;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,11 +40,16 @@ import static com.hadoken.common.exception.enums.GlobalErrorCodeConstants.*;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
-    private String applicationName;
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    private final String applicationName;
 
     @Resource
-    private ApiErrorLogFrameworkService apiErrorLogFrameworkService;
+    private final ApiErrorLogService apiErrorLogService;
+
+    public GlobalExceptionHandler(String applicationName, ApiErrorLogService apiErrorLogService) {
+        this.applicationName = applicationName;
+        this.apiErrorLogService = apiErrorLogService;
+    }
 
     /**
      * 处理所有异常，主要是提供给 Filter 使用
@@ -239,7 +244,7 @@ public class GlobalExceptionHandler {
             initExceptionLog(errorLog, req, e);
 
             // 执行插入 errorLog
-            apiErrorLogFrameworkService.createApiErrorLogAsync(errorLog);
+            apiErrorLogService.createApiErrorLogAsync(errorLog);
         } catch (Throwable th) {
             log.error("[createExceptionLog][url({}) log({}) 发生异常]", req.getRequestURI(), JsonUtils.toJsonString(errorLog), th);
         }

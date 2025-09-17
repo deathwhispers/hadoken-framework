@@ -1,5 +1,6 @@
 package com.hadoken.framework.web.mvc.core.filter;
 
+import com.hadoken.common.util.ServletUtils;
 import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- *  Request Body 缓存 Wrapper
+ * Request Body 缓存 Wrapper
  *
  * @author yanggj
  */
@@ -20,11 +21,11 @@ public class CacheRequestBodyWrapper extends HttpServletRequestWrapper {
     /**
      * 缓存的内容
      */
-    private final byte[] body = new byte[0];
+    private final byte[] body;
 
     public CacheRequestBodyWrapper(HttpServletRequest request) {
         super(request);
-//        body = ServletUtil.getBodyBytes(request);
+        body = ServletUtils.getBodyBytes(request);
     }
 
     @Override
@@ -55,7 +56,8 @@ public class CacheRequestBodyWrapper extends HttpServletRequestWrapper {
             }
 
             @Override
-            public void setReadListener(ReadListener readListener) {}
+            public void setReadListener(ReadListener readListener) {
+            }
 
         };
     }

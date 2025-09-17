@@ -2,7 +2,7 @@ package com.hadoken.framework.web.mvc.core.handler;
 
 import com.hadoken.common.result.CommonResult;
 import com.hadoken.framework.web.apilog.core.filter.ApiAccessLogFilter;
-import com.hadoken.framework.web.mvc.core.util.WebUtils;
+import com.hadoken.common.util.WebUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
