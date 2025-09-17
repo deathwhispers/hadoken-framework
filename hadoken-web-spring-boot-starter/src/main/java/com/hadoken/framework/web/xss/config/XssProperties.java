@@ -1,4 +1,4 @@
-package com.hadoken.framework.web.mvc.config;
+package com.hadoken.framework.web.xss.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -22,8 +22,8 @@ public class XssProperties {
      */
     private boolean enable = true;
     /**
-     * 需要排除的 URL，默认为空
+     * 需要排除的 URI，默认为空，支持通配符
      */
-    private List<String> excludeUrls = Collections.emptyList();
+    private List<String> excludePatterns = Collections.emptyList();
 
 }

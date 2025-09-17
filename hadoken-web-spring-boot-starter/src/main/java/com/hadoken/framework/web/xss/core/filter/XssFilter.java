@@ -1,6 +1,7 @@
-package com.hadoken.framework.web.mvc.core.filter;
+package com.hadoken.framework.web.xss.core.filter;
 
-import com.hadoken.framework.web.mvc.config.XssProperties;
+import com.hadoken.framework.web.xss.config.XssProperties;
+import com.hadoken.framework.web.xss.core.cleaner.XssCleaner;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,11 +10,10 @@ import org.springframework.util.PathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Xss 过滤器
- *
- * 对 Xss 不了解的胖友，可以看看 http://www.iocoder.cn/Fight/The-new-girl-asked-me-why-AJAX-requests-are-not-secure-I-did-not-answer/
  *
  * @author yanggj
  */
@@ -29,15 +29,18 @@ public class XssFilter extends OncePerRequestFilter {
      */
     private final PathMatcher pathMatcher;
 
-    public XssFilter(XssProperties properties, PathMatcher pathMatcher) {
+    private final XssCleaner xssCleaner;
+
+    public XssFilter(XssProperties properties, PathMatcher pathMatcher, XssCleaner xssCleaner) {
         this.properties = properties;
         this.pathMatcher = pathMatcher;
+        this.xssCleaner = xssCleaner;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-        filterChain.doFilter(new XssRequestWrapper(request), response);
+        filterChain.doFilter(new XssRequestWrapper(request, xssCleaner), response);
     }
 
     @Override
@@ -46,10 +49,13 @@ public class XssFilter extends OncePerRequestFilter {
         if (!properties.isEnable()) {
             return true;
         }
-
+        List<String> excludePatterns = properties.getExcludePatterns();
+        if (excludePatterns.isEmpty()) {
+            return false;
+        }
         // 如果匹配到无需过滤，则不过滤
-        String uri = request.getRequestURI();
-        return properties.getExcludeUrls().stream().anyMatch(excludeUrl -> pathMatcher.match(excludeUrl, uri));
+        String requestURI = request.getRequestURI();
+        return excludePatterns.stream().anyMatch(excludeUrl -> pathMatcher.match(excludeUrl, requestURI));
     }
 
 }
