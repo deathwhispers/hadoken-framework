@@ -6,7 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.hadoken.common.exception.BadRequestException;
 import com.hadoken.framework.security.core.LoginUser;
 import com.hadoken.framework.security.core.enums.DataScopeEnum;
-import com.hadoken.framework.web.core.util.WebUtils;
+import com.hadoken.common.util.WebUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;

@@ -1,4 +1,4 @@
-package com.hadoken.common.util.object;
+package com.hadoken.common.util.page;
 
 import com.hadoken.common.entity.PageParam;
 

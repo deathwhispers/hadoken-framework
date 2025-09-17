@@ -1,4 +1,4 @@
-package com.hadoken.framework.web.mvc.core.util;
+package com.hadoken.common.util;
 
 import com.hadoken.common.result.CommonResult;
 import jakarta.servlet.ServletRequest;

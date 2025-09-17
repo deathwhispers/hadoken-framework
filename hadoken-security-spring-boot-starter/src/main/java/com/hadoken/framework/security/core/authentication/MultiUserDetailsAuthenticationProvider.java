@@ -5,7 +5,7 @@ import com.hadoken.common.enums.UserTypeEnum;
 import com.hadoken.common.util.string.StringUtils;
 import com.hadoken.framework.security.core.LoginUser;
 import com.hadoken.framework.security.core.service.SecurityAuthFrameworkService;
-import com.hadoken.framework.web.config.WebProperties;
+import com.hadoken.framework.web.mvc.config.WebProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

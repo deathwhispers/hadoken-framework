@@ -3,7 +3,6 @@ package com.hadoken.framework.security.core.handler;
 import com.hadoken.common.exception.enums.GlobalErrorCodeConstants;
 import com.hadoken.common.result.CommonResult;
 import com.hadoken.framework.security.core.util.SecurityUtils;
-import com.hadoken.framework.web.core.util.ServletUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

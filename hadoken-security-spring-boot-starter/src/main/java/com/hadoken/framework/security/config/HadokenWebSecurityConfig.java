@@ -3,7 +3,7 @@ package com.hadoken.framework.security.config;
 import com.hadoken.common.util.string.StringUtils;
 import com.hadoken.framework.security.core.authentication.MultiUserDetailsAuthenticationProvider;
 import com.hadoken.framework.security.core.filter.JWTAuthenticationTokenFilter;
-import com.hadoken.framework.web.config.WebProperties;
+import com.hadoken.framework.web.mvc.config.WebProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;

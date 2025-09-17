@@ -1,6 +1,6 @@
 package com.hadoken.framework.security.config;
 
-import com.hadoken.framework.web.config.WebProperties;
+import com.hadoken.framework.web.mvc.config.WebProperties;
 import jakarta.annotation.Resource;
 import org.springframework.core.Ordered;
 import org.springframework.security.config.Customizer;

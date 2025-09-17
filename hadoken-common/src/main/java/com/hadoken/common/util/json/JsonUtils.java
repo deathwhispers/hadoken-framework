@@ -1,13 +1,15 @@
 package com.hadoken.common.util.json;
 
 import cn.hutool.core.util.ArrayUtil;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hadoken.common.util.string.StringUtils;
+import lombok.Getter;
 import lombok.SneakyThrows;
-import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -21,14 +23,16 @@ import java.util.List;
  * @version 1.0.0
  * @date 2022/03/02 13:38
  */
-@UtilityClass
 @Slf4j
 public class JsonUtils {
 
+    @Getter
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     static {
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL); // 忽略 null 值
     }
 
     /**
