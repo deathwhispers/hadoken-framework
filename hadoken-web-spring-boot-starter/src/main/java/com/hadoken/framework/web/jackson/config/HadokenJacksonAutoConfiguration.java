@@ -1,51 +1,78 @@
 package com.hadoken.framework.web.jackson.config;
 
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.hadoken.common.util.json.JsonUtils;
-import com.hadoken.framework.web.jackson.core.databind.LocalDateTimeDeserializer;
-import com.hadoken.framework.web.jackson.core.databind.LocalDateTimeSerializer;
+import com.hadoken.framework.web.jackson.databind.NumberSerializer;
+import com.hadoken.framework.web.jackson.databind.TimestampLocalDateTimeDeserializer;
+import com.hadoken.framework.web.jackson.databind.TimestampLocalDateTimeSerializer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Slf4j
-@AutoConfiguration
+@AutoConfiguration(after = JacksonAutoConfiguration.class)
 public class HadokenJacksonAutoConfiguration {
 
+    /**
+     * 从 Builder 源头定制（关键：使用 *ByType，避免 handledType 要求）
+     */
     @Bean
-    public BeanPostProcessor objectMapperBeanPostProcessor() {
-        return new BeanPostProcessor() {
-            @Override
-            public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-                if (!(bean instanceof ObjectMapper)) {
-                    return bean;
-                }
-                ObjectMapper objectMapper = (ObjectMapper) bean;
-                SimpleModule simpleModule = new SimpleModule();
+    public Jackson2ObjectMapperBuilderCustomizer ldtEpochMillisCustomizer() {
+        return builder -> builder
+                // Long -> Number
+                .serializerByType(Long.class, NumberSerializer.INSTANCE)
+                .serializerByType(Long.TYPE, NumberSerializer.INSTANCE)
+                // LocalDate / LocalTime
+                .serializerByType(LocalDate.class, LocalDateSerializer.INSTANCE)
+                .deserializerByType(LocalDate.class, LocalDateDeserializer.INSTANCE)
+                .serializerByType(LocalTime.class, LocalTimeSerializer.INSTANCE)
+                .deserializerByType(LocalTime.class, LocalTimeDeserializer.INSTANCE)
+                // LocalDateTime < - > EpochMillis
+                .serializerByType(LocalDateTime.class, TimestampLocalDateTimeSerializer.INSTANCE)
+                .deserializerByType(LocalDateTime.class, TimestampLocalDateTimeDeserializer.INSTANCE);
+    }
 
-                /*
-                 * 1. 新增Long类型序列化规则，数值超过2^53-1，在JS会出现精度丢失问题，因此Long自动序列化为字符串类型
-                 * 2. 新增LocalDateTime序列化、反序列化规则
-                 */
-                simpleModule
-                        .addSerializer(Long.class, ToStringSerializer.instance)
-                        .addSerializer(Long.TYPE, ToStringSerializer.instance)
-                        .addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE)
-                        .addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
+    /**
+     * 以 Bean 形式暴露 Module（Boot 会自动注册到所有 ObjectMapper）
+     */
+    @Bean
+    public Module timestampSupportModuleBean() {
+        SimpleModule m = new SimpleModule("TimestampSupportModule");
+        // Long -> Number，避免前端精度丢失
+        m.addSerializer(Long.class, NumberSerializer.INSTANCE);
+        m.addSerializer(Long.TYPE, NumberSerializer.INSTANCE);
+        // LocalDate / LocalTime
+        m.addSerializer(LocalDate.class, LocalDateSerializer.INSTANCE);
+        m.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
+        m.addSerializer(LocalTime.class, LocalTimeSerializer.INSTANCE);
+        m.addDeserializer(LocalTime.class, LocalTimeDeserializer.INSTANCE);
+        // LocalDateTime < - > EpochMillis
+        m.addSerializer(LocalDateTime.class, TimestampLocalDateTimeSerializer.INSTANCE);
+        m.addDeserializer(LocalDateTime.class, TimestampLocalDateTimeDeserializer.INSTANCE);
+        return m;
+    }
 
-                objectMapper.registerModules(simpleModule);
-
-                JsonUtils.init(objectMapper);
-                log.info("初始化 jackson 自动配置");
-                return bean;
-            }
-        };
+    /**
+     * 初始化全局 JsonUtils，直接使用主 ObjectMapper
+     */
+    @Bean
+    @SuppressWarnings("InstantiationOfUtilityClass")
+    public JsonUtils jsonUtils(ObjectMapper objectMapper) {
+        JsonUtils.init(objectMapper);
+        log.debug("[init][初始化 JsonUtils 成功]");
+        return new JsonUtils();
     }
 
 }

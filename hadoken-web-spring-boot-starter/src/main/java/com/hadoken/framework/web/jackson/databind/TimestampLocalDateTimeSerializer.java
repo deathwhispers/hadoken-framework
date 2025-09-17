@@ -1,4 +1,4 @@
-package com.hadoken.framework.web.jackson.core.databind;
+package com.hadoken.framework.web.jackson.databind;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -9,16 +9,16 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 /**
- * LocalDateTime序列化规则
- * <p>
- * 会将LocalDateTime序列化为毫秒级时间戳
+ * 基于时间戳的 LocalDateTime 序列化器
  */
-public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
+public class TimestampLocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
-    public static final LocalDateTimeSerializer INSTANCE = new LocalDateTimeSerializer();
+    public static final TimestampLocalDateTimeSerializer INSTANCE = new TimestampLocalDateTimeSerializer();
 
     @Override
     public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        // 将 LocalDateTime 对象，转换为 Long 时间戳
         gen.writeNumber(value.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
     }
+
 }
