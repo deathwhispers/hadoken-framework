@@ -4,6 +4,7 @@ import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.hadoken.common.util.ServletUtils;
 import com.hadoken.common.util.monitor.TracerUtils;
 import com.hadoken.framework.web.apilog.core.service.ApiAccessLogService;
 import com.hadoken.framework.web.apilog.core.service.dto.ApiAccessLogDTO;
