@@ -1,1 +1,1 @@
-com.hadoken.framework.redis.config.HadokenRedisAutoConfiguration
+com.github.hadoken.framework.redis.autoconfigure.HadokenRedisAutoConfiguration

@@ -1,3 +1,6 @@
-com.hadoken.framework.web.apilog.config.HadokenApiLogAutoConfiguration
-com.hadoken.framework.web.jackson.config.HadokenJacksonAutoConfiguration
-com.hadoken.framework.web.mvc.config.HadokenWebAutoConfiguration
+com.github.hadoken.framework.web.apilog.autoconfigure.HadokenApiLogAutoConfiguration
+com.github.hadoken.framework.web.encrypt.autoconfigure.HadokenApiEncryptAutoConfiguration
+com.github.hadoken.framework.web.jackson.autoconfigure.HadokenJacksonAutoConfiguration
+com.github.hadoken.framework.web.mvc.autoconfigure.HadokenWebAutoConfiguration
+com.github.hadoken.framework.web.springdoc.autoconfigure.HadokenSwaggerAutoConfiguration
+com.github.hadoken.framework.web.xss.autoconfigure.HadokenXssAutoConfiguration

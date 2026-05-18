@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  config.com.github.hadoken.framework.monitor.HadokenTraceAutoConfiguration

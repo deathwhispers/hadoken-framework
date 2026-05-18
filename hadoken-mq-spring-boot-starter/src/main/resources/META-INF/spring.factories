@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.hadoken.framework.mq.config.HadokenMQAutoConfiguration
+com.github.hadoken.framework.mq.autoconfigure.HadokenMQAutoConfiguration

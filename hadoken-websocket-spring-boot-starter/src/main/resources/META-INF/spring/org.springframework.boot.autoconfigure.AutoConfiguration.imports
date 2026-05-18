@@ -1,1 +1,1 @@
-com.hadoken.framework.websocket.config.HadokenWebSocketAutoConfiguration
+com.github.hadoken.framework.websocket.autoconfigure.HadokenWebSocketAutoConfiguration

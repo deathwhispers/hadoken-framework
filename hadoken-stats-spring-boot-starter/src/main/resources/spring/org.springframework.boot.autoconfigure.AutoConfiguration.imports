@@ -1,1 +1,1 @@
-com.hadoken.framework.scheduler.config.HadokenSchedulerAutoConfiguration
+com.github.hadoken.framework.scheduler.autoconfigure.HadokenSchedulerAutoConfiguration
