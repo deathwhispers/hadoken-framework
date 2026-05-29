@@ -32,7 +32,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Maven 版本为 3.9.x，Maven Compiler Plugin 版本为 3.14.x
   3. JDK 25 新特性代码规范文档已创建并可被开发团队访问
   4. 规范文档涵盖记录类模式匹配、虚拟线程、值类型的使用指南
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Maven配置升级（BUILD-01~04）
+- [ ] 01-02-PLAN.md — JDK 25代码规范文档创建（STD-01~04）
 
 ### Phase 2: Security Fixes
 **Goal**: 消除代码中的安全隐患，确保加密机制符合现代安全标准
@@ -117,7 +121,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Build Environment & Code Standards | 0/TBD | Not started | - |
+| 1. Build Environment & Code Standards | 0/2 | Not started | - |
 | 2. Security Fixes | 0/TBD | Not started | - |
 | 3. Core Framework Upgrade | 0/TBD | Not started | - |
 | 4. Database & Redis Dependencies | 0/TBD | Not started | - |
