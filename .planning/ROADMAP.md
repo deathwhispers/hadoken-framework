@@ -50,10 +50,10 @@ Plans:
 **Plans**: 4 plans in 2 waves
 
 Plans:
-- [ ] 02-01-PLAN.md — 密钥配置注入（SEC-01）— Wave 1
-- [ ] 02-02-PLAN.md — DES到AES-256升级（SEC-02）— Wave 1
-- [ ] 02-03-PLAN.md — RSA密钥升级（SEC-03）— Wave 2 (依赖02-01)
-- [ ] 02-04-PLAN.md — 默认密码移除（SEC-04）— Wave 2 (依赖02-01)
+- [x] 02-01-PLAN.md — 密钥配置注入（SEC-01）— Wave 1
+- [x] 02-02-PLAN.md — DES到AES-256升级（SEC-02）— Wave 1
+- [x] 02-03-PLAN.md — RSA密钥升级（SEC-03）— Wave 2 (依赖02-01)
+- [x] 02-04-PLAN.md — 默认密码移除（SEC-04）— Wave 2 (依赖02-01)
 
 ### Phase 3: Core Framework Upgrade
 **Goal**: Spring Boot、Spring Cloud、Spring Cloud Alibaba 升级到支持 JDK 25 的兼容版本

@@ -57,7 +57,7 @@
 - [ ] **SEC-01**: 移除硬编码加密密钥（改为配置注入）
 - [ ] **SEC-02**: 替换 DES 加密算法为 AES-256
 - [ ] **SEC-03**: RSA 密钥长度升级至 2048 位或以上
-- [ ] **SEC-04**: 默认密码移除/改为配置
+- [x] **SEC-04**: 默认密码移除/改为配置
 
 ### Code Standards
 
@@ -119,7 +119,7 @@
 | SEC-01 | Phase 2 | Pending |
 | SEC-02 | Phase 2 | Pending |
 | SEC-03 | Phase 2 | Pending |
-| SEC-04 | Phase 2 | Pending |
+| SEC-04 | Phase 2 | Complete |
 | CORE-01 | Phase 3 | Pending |
 | CORE-02 | Phase 3 | Pending |
 | CORE-03 | Phase 3 | Pending |
