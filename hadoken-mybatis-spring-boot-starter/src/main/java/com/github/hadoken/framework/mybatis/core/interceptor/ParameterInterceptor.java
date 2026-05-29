@@ -40,6 +40,9 @@ public class ParameterInterceptor implements Interceptor {
     @Resource
     private Encrypt encrypt;
 
+    @Resource
+    private DBAESUtil dbAESUtil;
+
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
 
@@ -107,7 +110,7 @@ public class ParameterInterceptor implements Interceptor {
             Map<String, String> map = ((Map<String, String>) parameterObject);
             for (String param : params) {
                 String value = map.get(param);
-                map.put(param, value == null ? null : DBAESUtil.encrypt(value));
+                map.put(param, value == null ? null : dbAESUtil.encrypt(value));
             }
 //            parameterObject = map;
         }
