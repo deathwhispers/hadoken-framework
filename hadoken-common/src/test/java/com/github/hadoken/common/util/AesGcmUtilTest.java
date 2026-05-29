@@ -25,14 +25,14 @@ public class AesGcmUtilTest {
     @Before
     public void setUp() {
         // 32字节有效AES-256密钥（Base64编码）
-        String base64Key = "dGhpcy1pcy1hLXRlc3QtYWVzLWtleS0zMi1ieXRlcw==";
+        String base64Key = "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=";
         validKeyBytes = Base64.getDecoder().decode(base64Key);
 
         // 8字节无效密钥
         invalidKeyBytes = Base64.getDecoder().decode("dGVzdC1rZXk=");
 
         // 另一个32字节错误密钥
-        wrongKeyBytes = Base64.getDecoder().decode("YW5vdGhlci1hZXMta2V5LWZvci10ZXN0aW5n");
+        wrongKeyBytes = Base64.getDecoder().decode("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXowMTIzNDU=");
     }
 
     @Test
@@ -111,7 +111,7 @@ public class AesGcmUtilTest {
     public void testDecodeKeyFromBase64() {
         // RED阶段：这个测试应该失败，因为AesGcmUtil还不存在
         // 测试密钥解码方法
-        String base64Key = "dGhpcy1pcy1hLXRlc3QtYWVzLWtleS0zMi1ieXRlcw==";
+        String base64Key = "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=";
         byte[] decodedKey = AesGcmUtil.decodeKeyFromBase64(base64Key);
 
         assertNotNull("解码后的密钥不应为null", decodedKey);
