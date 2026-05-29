@@ -47,7 +47,13 @@ Plans:
   2. 加密算法已从 DES 升级到 AES-256 或更强的安全标准
   3. RSA 密钥长度已升级到 2048 位或以上
   4. 不存在硬编码或默认密码，所有敏感配置通过外部注入
-**Plans**: TBD
+**Plans**: 4 plans in 2 waves
+
+Plans:
+- [ ] 02-01-PLAN.md — 密钥配置注入（SEC-01）— Wave 1
+- [ ] 02-02-PLAN.md — DES到AES-256升级（SEC-02）— Wave 1
+- [ ] 02-03-PLAN.md — RSA密钥升级（SEC-03）— Wave 2 (依赖02-01)
+- [ ] 02-04-PLAN.md — 默认密码移除（SEC-04）— Wave 2 (依赖02-01)
 
 ### Phase 3: Core Framework Upgrade
 **Goal**: Spring Boot、Spring Cloud、Spring Cloud Alibaba 升级到支持 JDK 25 的兼容版本
@@ -122,7 +128,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Build Environment & Code Standards | 0/2 | Not started | - |
-| 2. Security Fixes | 0/TBD | Not started | - |
+| 2. Security Fixes | 0/4 | Not started | - |
 | 3. Core Framework Upgrade | 0/TBD | Not started | - |
 | 4. Database & Redis Dependencies | 0/TBD | Not started | - |
 | 5. Tools & Utilities | 0/TBD | Not started | - |
