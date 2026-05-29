@@ -77,7 +77,12 @@ Plans:
   3. Redisson 版本已升级到支持 JDK 25
   4. Spring Data Redis 版本通过 Spring Boot BOM 正确管理
   5. 数据库和 Redis 功能测试通过
-**Plans**: TBD
+**Plans**: 3 plans in 2 waves
+
+Plans:
+- [x] 04-01-PLAN.md — 验证和升级MyBatis-Plus及相关数据库组件（DB-01~04）— Wave 1
+- [x] 04-02-PLAN.md — 验证和升级Redis相关组件（REDIS-01~02）— Wave 1
+- [x] 04-03-PLAN.md — 功能验证和测试（覆盖所有组件）— Wave 2 (依赖04-01, 04-02)
 
 ### Phase 5: Tools & Utilities
 **Goal**: 工具库升级到 JDK 25 兼容版本，破坏性变更已识别和处理
@@ -130,7 +135,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 1. Build Environment & Code Standards | 0/2 | Not started | - |
 | 2. Security Fixes | 0/4 | Not started | - |
 | 3. Core Framework Upgrade | 0/TBD | Not started | - |
-| 4. Database & Redis Dependencies | 0/TBD | Not started | - |
+| 4. Database & Redis Dependencies | 3/3 planned | Ready for execution | - |
 | 5. Tools & Utilities | 0/TBD | Not started | - |
 | 6. API Documentation | 0/TBD | Not started | - |
 | 7. Monitoring Tools | 0/TBD | Not started | - |
