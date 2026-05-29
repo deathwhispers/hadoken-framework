@@ -47,9 +47,33 @@ public class SecurityProperties {
 
     /**
      * mock 模式的秘钥
-     * 一定要配置秘钥，保证安全性
+     * <p>
+     * 注意：只有当 mockEnable 为 true 时才需要配置此属性。
+     * 必须配置一个安全的秘钥，不能使用默认值。
      */
-    @NotEmpty(message = "mock 模式的秘钥不能为空") // 这里设置了一个默认值，因为实际上只有 mockEnable 为 true 时才需要配置。
-    private String mockSecret = "123456";
+    @NotEmpty(message = "mock模式的秘钥不能为空")
+    private String mockSecret;
+
+    /**
+     * 验证配置完整性
+     *
+     * @throws IllegalStateException 如果必需配置缺失
+     */
+    public void validate() {
+        if (Boolean.TRUE.equals(mockEnable)) {
+            if (mockSecret == null || mockSecret.trim().isEmpty()) {
+                throw new IllegalStateException(
+                    "当 hadoken.security.mock-enable 为 true 时，必须配置 hadoken.security.mock-secret"
+                );
+            }
+            // 简单安全检查：避免使用常见弱密码
+            if ("123456".equals(mockSecret) || "password".equals(mockSecret) ||
+                "admin".equals(mockSecret) || "test".equals(mockSecret)) {
+                throw new IllegalStateException(
+                    "mock-secret 不能使用常见弱密码，请设置一个安全的秘钥"
+                );
+            }
+        }
+    }
 
 }
