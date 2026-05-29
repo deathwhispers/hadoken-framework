@@ -237,22 +237,25 @@ class FrameworkCompatibilityTest {
 2. 检查Spring官方兼容性矩阵确认版本兼容性
 3. 验证Spring Cloud Alibaba官方文档的兼容性说明
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Spring Boot 3.5.x 的确切发布状态**
+1. **Spring Boot 3.5.x 的确切发布状态** — RESOLVED: 通过 Plan 03-01 Task 1 验证版本可用性，Task 2 测试编译确认
    - 已知信息: Spring Boot通常每6个月发布一个主要版本
    - 不确定信息: 3.5.x是否已发布稳定版本，具体版本号
    - 建议: 检查Spring官方GitHub releases或Maven Central
+   - **解决方案:** 执行时验证，如3.5.x未发布则使用3.4.x作为备选
 
-2. **Spring Cloud Alibaba 与 Spring Cloud 2025.x 的兼容性**
+2. **Spring Cloud Alibaba 与 Spring Cloud 2025.x 的兼容性** — RESOLVED: 通过 Plan 03-02 Task 2 验证兼容性，Task 4 提供备选方案
    - 已知信息: Spring Cloud Alibaba通常滞后于Spring Cloud发布
    - 不确定信息: 是否有官方支持的2023.0.1.0+版本与2025.x兼容
    - 建议: 检查Alibaba官方文档或考虑备选方案
+   - **解决方案:** 执行时验证，如不兼容则降级Spring Cloud到2023.x或移除Alibaba依赖
 
-3. **破坏性变更的具体影响**
+3. **破坏性变更的具体影响** — RESOLVED: 通过 Plan 03-01 Task 3 处理破坏性变更，Plan 03-03 验证整体兼容性
    - 已知信息: Spring Boot 3.3.x到3.5.x可能有破坏性变更
    - 不确定信息: 具体哪些API或配置需要调整
    - 建议: 查阅Spring Boot升级指南和发布说明
+   - **解决方案:** 执行时查阅官方升级指南，按问题逐一修复
 
 ## Environment Availability
 
