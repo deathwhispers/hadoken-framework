@@ -93,7 +93,7 @@ public class RsaUtilsTest {
     }
 
     @Test
-    public void testRsaEmptyInputHandling() {
+    public void testRsaEmptyInputHandling() throws Exception {
         // 测试空输入
         RsaUtils.RsaKeyPair keyPair = RsaUtils.generateKeyPair();
 

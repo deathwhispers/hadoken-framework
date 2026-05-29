@@ -1,9 +1,7 @@
 package com.github.hadoken.common.config;
 
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
 
 /**
  * 加密配置属性
@@ -15,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
  * @date 2026/05/29
  */
 @ConfigurationProperties(prefix = "hadoken.security.encrypt")
-@Validated
 @Data
 public class EncryptProperties {
 
@@ -24,7 +21,6 @@ public class EncryptProperties {
      * <p>
      * 必须为32字节（256位）的Base64编码字符串
      */
-    @NotEmpty(message = "AES-256密钥不能为空，请配置 hadoken.security.encrypt.aes-key")
     private String aesKey;
 
     /**
@@ -32,7 +28,6 @@ public class EncryptProperties {
      * <p>
      * 用于RSA非对称加密的私钥，Base64编码
      */
-    @NotEmpty(message = "RSA私钥不能为空，请配置 hadoken.security.encrypt.rsa-private-key")
     private String rsaPrivateKey;
 
     /**
@@ -40,7 +35,6 @@ public class EncryptProperties {
      * <p>
      * 用于RSA非对称加密的公钥，Base64编码
      */
-    @NotEmpty(message = "RSA公钥不能为空，请配置 hadoken.security.encrypt.rsa-public-key")
     private String rsaPublicKey;
 
     /**
