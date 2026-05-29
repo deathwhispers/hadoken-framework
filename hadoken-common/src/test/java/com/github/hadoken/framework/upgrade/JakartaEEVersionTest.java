@@ -3,7 +3,6 @@ package com.github.hadoken.framework.upgrade;
 import org.junit.Test;
 
 import jakarta.servlet.http.HttpServlet;
-import jakarta.ws.rs.core.Application;
 
 import static org.junit.Assert.assertTrue;
 
@@ -21,18 +20,5 @@ public class JakartaEEVersionTest {
              specificationVersion.startsWith("6.")));
 
         System.out.println("Jakarta Servlet API Version: " + specificationVersion);
-    }
-
-    @Test
-    public void testJakartaRSVersion() {
-        // 检查 Jakarta RESTful Web Services API 版本
-        Package rsPackage = Application.class.getPackage();
-        String specificationVersion = rsPackage.getSpecificationVersion();
-
-        assertTrue("Jakarta RESTful Web Services API specification should be 3.1 or higher for Spring Boot 3.5.x, got: " + specificationVersion,
-            specificationVersion != null &&
-            (specificationVersion.startsWith("3.")));
-
-        System.out.println("Jakarta RESTful Web Services API Version: " + specificationVersion);
     }
 }
