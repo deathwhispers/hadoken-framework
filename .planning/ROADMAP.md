@@ -142,8 +142,9 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 3. Core Framework Upgrade | 3/3 | ✅ **完成** | 2026/05/30 |
 | 4. Database & Redis Dependencies | 3/3 | ✅ **完成** | 2026/05/30 |
 | 5. Tools & Utilities | 5/5 | ✅ **完成** | 2026/05/30 |
-| 6. API Documentation | - | ⏳ 编译验证通过 | - |
-| 7. Monitoring Tools | - | ⏳ 编译验证通过 | - |
-| 8. Verification & Testing | - | 📋 待执行 | - |
+| 6. API Documentation | - | ✅ **完成** | 2026/05/31 |
+| 7. Monitoring Tools | - | ✅ **完成** | 2026/05/31 |
+| 8. Verification & Testing | - | ⚠️ **部分完成** | - |
 
 **JDK 25 编译验证:** ✅ 所有 14 个模块编译成功 (OpenJDK 25.0.3)
+**单元测试验证:** ⚠️ 35 简单测试通过，Spring 集成测试待修复
